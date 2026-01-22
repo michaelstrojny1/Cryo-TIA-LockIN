@@ -1,4 +1,4 @@
-package lockinPkg;
+package lockIn_pkg;
 
     typedef logic signed [15:0] sampleT;
     typedef logic signed [31:0] accumT;
