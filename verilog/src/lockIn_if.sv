@@ -9,8 +9,8 @@ interface lockIn_if #(
     logic clkSlow;
     logic rstN;
 
-    logic [ADC_WIDTH-1:0] adcData;
-    phaseAngleT refPhase;
+    logic       [ADC_WIDTH-1:0] adcData;
+    phaseAngleT                 refPhase;
 
     accumT magnitude;
     accumT phase;
