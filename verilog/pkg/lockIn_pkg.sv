@@ -2,7 +2,22 @@ package lockIn_pkg;
 
     typedef logic signed [15:0] sampleT;
     typedef logic signed [31:0] accumT;
-    typedef logic signed [63:0] long_accumT;
+    typedef logic signed [63:0] longAccumT;
+
+    // CIC Parameters
+    typedef struct packed {
+        int R;      // Decimation factor
+        int N;      // Number of stages
+        int M;      // Differential delay
+    } cicParamsT;
+
+    // Polyphase branch structure
+    typedef struct {
+        accumT intState;    // Integrator state for this branch
+        accumT combState;   // Comb state for this branch
+    }
+    
+    // Phase for square mixing
     typedef enum logic [1:0] {
         PHASE_0     = 2'b00,
         PHASE_90    = 2'b01.
