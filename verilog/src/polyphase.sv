@@ -66,7 +66,7 @@ module polyphase #(
     // CIC COMB (Sync to clkSlow)
 
     logic combProcessing;
-    logic [$clog2(R)-1:-] combPhase;
+    logic [$clog2(R)-1:-] combPtr;
     accumT combDelay[0:R-1][0:N-1];
 
     always_ff @(posedge clkSlow or negedge rstN) begin
@@ -76,31 +76,60 @@ module polyphase #(
                 for (int s = 0; s < N; s++) begin
                     polyCombs[b][s] <= '0;
                     combDelay[b][s] <= '0;
-                    cicOutputBuffer[b] <= '0;
                 end
-                cicOutputValid <= 1'b0;
             end
             combProcessing <= 1'b0;
-            combPhase <= '0;
-            cicReadPtr <= '0;
+            combPtr <= '0;
+            cicOut.valid <= 1'b0;
             cicReady <= 1'b0;
 
         end else begin
             // Process one polyphase branch per clkSlow cycle
-            if (combPhase == R-1) begin
-                combProcessing <= 1'b1;
-            end
-
-            if (combProcessing) begin
-                // Apply comb filter to this phase's integrator output
+            if(combProcessing) begin
                 for (int s = 0; s < N; s++) begin
                     if (s == 0) begin
                         // First comb stage
-                        polyCombs[combPhase][0] <=
-                            polyIntegrators[combPhase][N-1] -
-                            combDelay[combPhase][0];
+                        polyCombs[combPtr][0] <= 
+                            polyIntegrators[combPtr][N-1] -
+                            combDelay[combPtr][0];
+                        combDelay[combPtr][0] <= polyIntegrators[combPtr][N-1];
+                    
+                    end else begin
+                        // Subsequent comb stages
+                        polyCombs[combPtr][s] <= 
+                            polyIntegrators[combPtr][s-1] -
+                            combDelay[combPtr][s];
+                        combDelay[combPtr][s] <= polyIntegrators[combPtr][s-1];
+                    end
+                end
 
+                // Output this phase's result
+                cicOut.data <= polyCombs[combPtr][N-1];
+                cicOut.phase <= phaseAngleT'(combPtr % 4);  // For quadrature
+                cicOut.valid <= 1'b1;
+
+                // Move to the next phase
+                if (combPtr == R - 1) begin
+                    combPtr <= '0;
+                    combProcessing <= 1'b0;
+                    cicReady <= 1'b1;                       // Ie. All outputs are done
+
+                end else begin
+                    combPtr <= combPtr + 1;
+                end
+
+            end else begin
+                cicOut.valid <= 1'b0;
+                cicReady <= 1'b0;
+            end
+        end
     end
 
+    // Start comb processing once integrators have enough data
+    always_ff @(posedge clkSlow) begin
+        if (!combProcessing && inputPtr == R - 1) begin
+            combProcessing <= 1'b1;
+        end
+    end
 
 endmodule
