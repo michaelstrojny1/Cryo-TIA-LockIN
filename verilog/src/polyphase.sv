@@ -1,5 +1,5 @@
 module polyphase #(
-    parameter int R             = 64,                // Decimation factor
+    parameter int R             = 16,                // Decimation factor
     parameter int N             = 4,                 // Number of CIC stages (order)
     parameter int M             = 1,                 // Differential delay (usually 1)
     parameter int ADC_WIDTH     = 16,
@@ -66,7 +66,7 @@ module polyphase #(
     // CIC COMB (Sync to clkSlow)
 
     logic combProcessing;
-    logic [$clog2(R)-1:-] combPtr;
+    logic [$clog2(R)-1:0] combPtr;
     accumT combDelay[0:R-1][0:N-1];
 
     always_ff @(posedge clkSlow or negedge rstN) begin
