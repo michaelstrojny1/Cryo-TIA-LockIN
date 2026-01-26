@@ -24,15 +24,9 @@ module polyphase #(
         accumT polyCombs[0:R-1][0:N-1];
 
         // Write pointer for distribution
-        logic [$clog2(R)-1:0] inputPhase;
-        sampleT currentInput;
-
-        // CIC Output Buffer
-        accumT cicOutputBuffer[0:R-1];
-        logic cicOutputValid[0:R-1];
-        logic [$clog2(R)-1:0] cicReadPtr;
+        logic [$clog2(R)-1:0] inputPtr;
     
-    // POLYPHASE INTEGRATORS
+    // POLYPHASE INTEGRATORS (Sync to clkADC)
 
         always_ff @(posedge clkADC or negedge rstN) begin
             if (!rstN) begin
@@ -42,28 +36,29 @@ module polyphase #(
                         polyIntegrators[b][s] <= '0;
                     end
                 end
-                inputPhase      <= '0;
-                currentInput    <= '0;
+                inputPtr <= '0;
 
             end else begin
-                // Store the current input
-                currentInput <= sampleT'(adcData);
-
                 // Update appropriate polyphase branch
                 for (int s = 0; s < N; s++) begin
                     if (s == 0) begin
                         // Add the input
-                        polyIntegrators[inputPhase][0] <=
-                            polyIntegrators[inputPhase][s] +
-                            polyIntegrators[inputPhase][s-1];
+                        polyIntegrators[inputPtr][0] <=
+                            polyIntegrators[inputPtr][s] +
+                            sampleT'(adcData);
+                    end else begin
+                        // Cascade subsequent stages
+                        polyIntegrators[inputPtr][0] <=
+                            polyIntegrators[inputPtr][s] +
+                            polyIntegrators[inputPtr][s-1];
                     end
                 end
 
                 // Move to the next phase
-                if (inputPhase == R-1) begin
-                    inputPhase <= '0;
+                if (inputPtr == R-1) begin
+                    inputPtr <= '0;
                 end else begin
-                    inputPhase <= inputPhase + 1;
+                    inputPtr <= inputPtr + 1;
                 end
             end
         end
