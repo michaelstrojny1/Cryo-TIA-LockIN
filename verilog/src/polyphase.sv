@@ -5,17 +5,14 @@ module polyphase #(
     parameter int ADC_WIDTH     = 16,
     parameter int ACCUM_WIDTH   = 32                 // ADC_WIDTH + $clog2(R^N)
 ) (
-    input  logic                    clkADC,         // ADC sample clock (fast)
-    input  logic                    clkSlow,        // Processing clock (f_adc/R)
-    input  logic                    rstN,
-    input  logic    [ADC_WIDTH-1:0] adcData,
+    input  logic                        clkADC,         // ADC sample clock (fast)
+    input  logic                        clkSlow,        // Processing clock (f_adc/R)
+    input  logic                        rstN,
     
-    output accumT                   magnitude,
-    output accumT                   phaseOut,
-    output accumT                   IOut,
-    output accumT                   QOut,
-    output logic                    dataValid,
-    output logic                    cicReady
+    input  logic        [ADC_WIDTH-1:0] adcData,
+    
+    output cicOutputT                   cicOut,
+    output logic                        cicReady
 );
     
     import lockIn_pkg::*;
@@ -107,7 +104,7 @@ module polyphase #(
                         polyCombs[combPhase][0] <=
                             polyIntegrators[combPhase][N-1] -
                             combDelay[combPhase][0];
-                            
+
     end
 
 
