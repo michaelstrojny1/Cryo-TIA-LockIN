@@ -25,6 +25,29 @@ package lockIn_pkg;
         PHASE_270   = 2'b11
     } phaseAngleT;
 
+    // Interface between CIC and Mixer
+    typedef struct {
+        accumT      data;
+        logic       valid;
+        phaseAngleT phase;
+    } cicOutputT;
+
+    // Mixer Output
+    typedef struct {
+        accumT  I;
+        accumT  Q;
+        logic   valid;
+    } mixerOutputT;
+
+    // Lock-in Output
+    typedef struct {
+        accumT  magnitude;
+        accumT  phase;
+        accumT  I;
+        accumT  Q;
+        logic   valid;
+    } lockInOutputT
+
     // Function to compute magnitude
     function logic [31:0] computeMagnitudeSq(
         input accumT I,

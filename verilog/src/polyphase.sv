@@ -71,7 +71,44 @@ module polyphase #(
             end
         end
 
+    // CIC COMB (Sync to clkSlow)
 
+    logic combProcessing;
+    logic [$clog2(R)-1:-] combPhase;
+    accumT combDelay[0:R-1][0:N-1];
+
+    always_ff @(posedge clkSlow or negedge rstN) begin
+        if (!rstN) begin
+            // Reset comb states
+            for (int b = 0; b < R; b++) begin
+                for (int s = 0; s < N; s++) begin
+                    polyCombs[b][s] <= '0;
+                    combDelay[b][s] <= '0;
+                    cicOutputBuffer[b] <= '0;
+                end
+                cicOutputValid <= 1'b0;
+            end
+            combProcessing <= 1'b0;
+            combPhase <= '0;
+            cicReadPtr <= '0;
+            cicReady <= 1'b0;
+
+        end else begin
+            // Process one polyphase branch per clkSlow cycle
+            if (combPhase == R-1) begin
+                combProcessing <= 1'b1;
+            end
+
+            if (combProcessing) begin
+                // Apply comb filter to this phase's integrator output
+                for (int s = 0; s < N; s++) begin
+                    if (s == 0) begin
+                        // First comb stage
+                        polyCombs[combPhase][0] <=
+                            polyIntegrators[combPhase][N-1] -
+                            combDelay[combPhase][0];
+                            
+    end
 
 
 endmodule
