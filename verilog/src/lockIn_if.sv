@@ -1,8 +1,8 @@
 import lockIn_pkg::*;
 
 interface lockIn_if #(
-    parameter int R         = 16;   // Decimation Factor
-    parameter int N         = 4;    // CIC stages
+    parameter int R         = 16,   // Decimation Factor
+    parameter int N         = 4,    // CIC stages
     parameter int ADC_WIDTH = 16
 );
 
