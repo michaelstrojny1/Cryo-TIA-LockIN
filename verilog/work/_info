@@ -7,4 +7,28 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-dC:/Users/Peter/Documents/GitHub/Cryo-TIA-LockIN/verilog
+Z0 dC:/Users/Peter/Documents/GitHub/Cryo-TIA-LockIN/verilog
+XlockIn_pkg
+DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+!s110 1769894729
+!i10b 1
+!s100 K`ci^Ij>Maij<49SnnS[=0
+I@acbZ0IIUPJWnjm3Pm;a41
+V@acbZ0IIUPJWnjm3Pm;a41
+S1
+R0
+w1769894726
+8pkg/lockIn_pkg.sv
+Fpkg/lockIn_pkg.sv
+L0 1
+OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1769894729.000000
+!s107 pkg/lockIn_pkg.sv|
+!s90 -reportprogress|300|-sv|pkg/lockIn_pkg.sv|
+!i113 1
+o-sv
+tCvgOpt 0
+nlock@in_pkg

@@ -1,3 +1,5 @@
+import lockIn_pkg::*;
+
 module polyphase #(
     parameter int R             = 16,                // Decimation factor
     parameter int N             = 4,                 // Number of CIC stages (order)
@@ -14,8 +16,6 @@ module polyphase #(
     output cicOutputT                   cicOut,
     output logic                        cicReady
 );
-    
-    import lockIn_pkg::*;
 
     // POLYPHASE CIC DECOMPOSITION
 

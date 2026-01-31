@@ -1,6 +1,6 @@
-module polyphase_tb;
+import lockIn_pkg::*;
 
-    import lockIn_pkg::*;
+module polyphase_tb;
 
     // STEP 1: SET UP DUT
 
