@@ -9,7 +9,7 @@ module polyphase_tb;
     logic clkSlow   = 0;
     logic rstN      = 0;
 
-    always #5 clkAdc    = ~clkADC;   // 100 MHz
+    always #5 clkADC    = ~clkADC;   // 100 MHz
     always #80 clkSlow  = ~clkSlow;  // 100 Mhz/16 
 
     // Signals
@@ -35,7 +35,7 @@ module polyphase_tb;
         $display("=== Test 1: Reset Test ===");
         rstN = 0;
         adcData = 0;
-        repeat(10) @posedge(clkADC);
+        repeat(10) @(posedge clkADC);
 
         // Check all outputs are zero
         assert(cicOut.valid == 0);
