@@ -15,12 +15,12 @@ package lockIn_pkg;
     typedef struct {
         accumT intState;    // Integrator state for this branch
         accumT combState;   // Comb state for this branch
-    }
+    } polyphaseBranchT;
     
     // Phase for square mixing
     typedef enum logic [1:0] {
         PHASE_0     = 2'b00,
-        PHASE_90    = 2'b01.
+        PHASE_90    = 2'b01,
         PHASE_180   = 2'b10,
         PHASE_270   = 2'b11
     } phaseAngleT;
@@ -46,7 +46,7 @@ package lockIn_pkg;
         accumT  I;
         accumT  Q;
         logic   valid;
-    } lockInOutputT
+    } lockInOutputT;
 
     // Function to compute magnitude
     function logic [31:0] computeMagnitudeSq(

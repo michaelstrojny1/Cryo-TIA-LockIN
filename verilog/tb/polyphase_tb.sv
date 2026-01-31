@@ -43,5 +43,4 @@ module polyphase_tb;
         $display("Reset test PASSED");
     end
 
-
 endmodule
