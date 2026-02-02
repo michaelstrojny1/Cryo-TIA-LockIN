@@ -8,7 +8,7 @@ module polyphase_tb;
     logic rstN      = 0;
 
     always #5 clkADC    = ~clkADC;   // 100 MHz (10ns period)
-    always #20 clkSlow  = ~clkSlow;  // 25 MHz (40ns period) - CORRECT for R=4
+    always #20 clkSlow  = ~clkSlow;  // 25 MHz (40ns period)
 
     // Signals
     localparam R         = 4;
@@ -46,46 +46,7 @@ module polyphase_tb;
         rstN = 1;
         adcData = 16'h1000; // Constant input of 4096
 
-        // DEBUG: Monitor internal signals
-        $display("\n=== Debug: Monitoring Internal Signals ===");
-        
-        fork
-            // Monitor clkADC domain
-            begin
-                forever begin
-                    @(posedge clkADC);
-                    $display("[%0t] ADC: inputPtr=%0d", $time, dut.inputPtr);
-                    if ($time > 1000) disable fork;
-                end
-            end
-            
-            // Monitor clkSlow domain  
-            begin
-                forever begin
-                    @(posedge clkSlow);
-                    $display("[%0t] SLOW: combProcessing=%b, combPtr=%0d", 
-                             $time, dut.combProcessing, dut.combPtr);
-                    if ($time > 1000) disable fork;
-                end
-            end
-            
-            // Wait for output
-            begin
-                #10000;  // 10us timeout
-                $display("\n[%0t] DEBUG DUMP:", $time);
-                $display("  inputPtr = %0d", dut.inputPtr);
-                $display("  combProcessing = %b", dut.combProcessing);
-                $display("  combPtr = %0d", dut.combPtr);
-                $display("  cicOut.valid = %b", cicOut.valid);
-                $display("  cicReady = %b", cicReady);
-                $display("\nERROR: No outputs after 10us!");
-                $finish;
-            end
-        join
-        
-        // If we get here, we timed out
-        $display("\n=== Simulation failed - no outputs ===");
-        $finish;
+
     end
 
 endmodule

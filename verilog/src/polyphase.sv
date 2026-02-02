@@ -1,7 +1,7 @@
 import lockIn_pkg::*;
 
 module polyphase #(
-    parameter int R             = 16,                // Decimation factor
+    parameter int R             = 4,                // Decimation factor
     parameter int N             = 4,                 // Number of CIC stages (order)
     parameter int M             = 1,                 // Differential delay (usually 1)
     parameter int ADC_WIDTH     = 16,
@@ -127,7 +127,7 @@ module polyphase #(
 
     // Start comb processing once integrators have enough data
     always_ff @(posedge clkSlow) begin
-        if (!combProcessing && inputPtr == R - 1) begin
+        if (!combProcessing && inputPtr == 0) begin
             combProcessing <= 1'b1;
         end
     end
