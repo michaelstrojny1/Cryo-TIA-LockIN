@@ -18,6 +18,9 @@ module polyphase_tb;
     cicOutputT                    cicOut;
     logic                         cicReady;
 
+    int iteration = 0;
+    int sample_count = 0;
+
     // Testing with R = 4 for faster simulations
     polyphase #(.R(4)) dut (.*);
 
@@ -42,11 +45,35 @@ module polyphase_tb;
         end
 
         // Test 2: DC Input
-        $display("=== Test 2: DC Input ===");
+        $display("\n=== Test 2: DC Input ===");
+        $display("Applying constant DC input = 16'h1000 (4096 decimal)");
         rstN = 1;
         adcData = 16'h1000; // Constant input of 4096
-
-
+        
+        // Wait a few cycles for CIC to start processing
+        repeat(5) @(posedge clkADC);
+        
+        // Loop based on clkSlow (output rate) and display values
+        $display("\nMonitoring CIC outputs on clkSlow edges:");
+        $display("Clock   | Time(ns) | cicOut.data  | cicOut.valid | cicReady");
+        $display("--------|----------|--------------|--------------|---------");
+        
+        for (iteration = 0; iteration < 20; iteration++) begin
+            @(posedge clkSlow);  // Wait for output clock edge
+            
+            // Display all relevant signals
+            $display("clkSlow | %8t | %12h | %12b | %8b",
+                    $time, cicOut.data, cicOut.valid, cicReady);
+            
+            // Optional: Also display ADC data at this time
+            $display("  ADC Data: %h (%0d decimal)", adcData, adcData);
+            
+            // Count valid outputs
+            if (cicOut.valid) begin
+                sample_count++;
+                $display("  Valid sample #%0d received", sample_count);
+            end
+        end
     end
 
 endmodule

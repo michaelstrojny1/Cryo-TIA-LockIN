@@ -44,11 +44,11 @@ module polyphase #(
                     if (s == 0) begin
                         // Add the input
                         polyIntegrators[inputPtr][0] <=
-                            polyIntegrators[inputPtr][s] +
+                            polyIntegrators[inputPtr][0] +
                             sampleT'(adcData);
                     end else begin
                         // Cascade subsequent stages
-                        polyIntegrators[inputPtr][0] <=
+                        polyIntegrators[inputPtr][s] <=
                             polyIntegrators[inputPtr][s] +
                             polyIntegrators[inputPtr][s-1];
                     end
@@ -90,16 +90,16 @@ module polyphase #(
                     if (s == 0) begin
                         // First comb stage
                         polyCombs[combPtr][0] <= 
-                            polyIntegrators[combPtr][N-1] -
-                            combDelay[combPtr][0];
-                        combDelay[combPtr][0] <= polyIntegrators[combPtr][N-1];
+                            polyIntegrators[combPtr][N-1] -                     // Final output from integrator chain
+                            combDelay[combPtr][0];                              // Value stored from R cycles ago
+                        combDelay[combPtr][0] <= polyIntegrators[combPtr][N-1]; // Save value for next cycle
                     
                     end else begin
                         // Subsequent comb stages
                         polyCombs[combPtr][s] <= 
-                            polyIntegrators[combPtr][s-1] -
-                            combDelay[combPtr][s];
-                        combDelay[combPtr][s] <= polyIntegrators[combPtr][s-1];
+                            polyIntegrators[combPtr][s-1] -                     // Output from previous comb stage
+                            combDelay[combPtr][s];                              // Value stored from R cycles ago
+                        combDelay[combPtr][s] <= polyIntegrators[combPtr][s-1]; // Save value for next cycle
                     end
                 end
 
