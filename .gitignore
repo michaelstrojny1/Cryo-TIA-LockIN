@@ -1,0 +1,76 @@
+# Quartus Project Files
+*.qpf
+*.qsf
+*.qws
+
+# Quartus Database and Reports
+*.qdb/
+*.qpg
+*.qar
+*.rdb/
+*.sld
+*.summary
+*.done
+*.smsg
+*.pin
+*.rpt
+*.qdf
+*.qrc
+
+# Timing Analysis Files
+*.qta
+*.sta
+*.ftl
+*.sdc
+
+# Compilation Output
+output_files/
+db/
+incremental_db/
+*.sof
+*.pof
+*.rbf
+*.jam
+*.jbc
+*.ekp
+*.ttf
+*.qxp
+
+# Simulation files
+simulation/
+*.vwf
+*.vcd
+*.vht
+*.vo
+*.vho
+
+# Memory initialization files (unless they are source)
+*.hex
+*.mif
+*.rif
+
+# Temporary and working files
+*.bak
+*.tmp
+*~
+*.swp
+*.log
+*.jou
+
+# Project-specific work directories (common patterns)
+work/
+Work/
+WORK/
+*.work/
+*.backup/
+
+# Quartus incremental compilation
+*.cmp
+*.sopcinfo
+*.qsys
+*.sopc
+*.spd
+
+# Platform Designer/Qsys generated files
+hps_isw_handoff/
+synthesis/

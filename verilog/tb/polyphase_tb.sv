@@ -58,7 +58,7 @@ module polyphase_tb;
         $display("Clock   | Time(ns) | cicOut.data  | cicOut.valid | cicReady");
         $display("--------|----------|--------------|--------------|---------");
         
-        for (iteration = 0; iteration < 20; iteration++) begin
+        for (iteration = 0; iteration < 30; iteration++) begin
             @(posedge clkSlow);  // Wait for output clock edge
             
             // Display all relevant signals
