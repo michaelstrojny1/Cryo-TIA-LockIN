@@ -62,17 +62,8 @@ module polyphase_tb;
             @(posedge clkSlow);  // Wait for output clock edge
             
             // Display all relevant signals
-            $display("clkSlow | %8t | %12h | %12b | %8b",
+            $display("clkSlow | %8t | %8h | %1b | %1b",
                     $time, cicOut.data, cicOut.valid, cicReady);
-            
-            // Optional: Also display ADC data at this time
-            $display("  ADC Data: %h (%0d decimal)", adcData, adcData);
-            
-            // Count valid outputs
-            if (cicOut.valid) begin
-                sample_count++;
-                $display("  Valid sample #%0d received", sample_count);
-            end
         end
     end
 
