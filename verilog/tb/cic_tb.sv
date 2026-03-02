@@ -51,7 +51,6 @@ module cic_tb;
     // STEP 2: DEFINE TEST SEQUENCE
     
     initial begin
-        $dumpfile("waves.vcd");
         $dumpvars(0, cic_tb);
         
         // Initialize
