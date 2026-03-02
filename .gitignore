@@ -74,3 +74,4 @@ WORK/
 # Platform Designer/Qsys generated files
 hps_isw_handoff/
 synthesis/
+verilog/waves.vcd

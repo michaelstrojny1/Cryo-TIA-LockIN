@@ -21,6 +21,9 @@ module polyphase_tb;
     cicOutputT cicOut;
     logic cicReady;
     
+    // Internal tracking variable for previous output
+    logic [31:0] cicOut_prev;
+    
     // Clock generators
     initial begin
         clkADC = 0;
@@ -57,6 +60,7 @@ module polyphase_tb;
         // Initialize
         rstN = 0;
         adcData = 0;
+        cicOut_prev = 0;
         
         // ========== TEST 1: RESET ==========
         $display("\n==================================================");
@@ -77,63 +81,59 @@ module polyphase_tb;
         $display("TEST 2: CONSTANT DC INPUT (0x1000)");
         $display("==================================================");
         
+        $display("Input: 16'h1000 = %0d decimal", 16'h1000);
+        $display("Expected gain: (R*M)^N = (%0d*%0d)^%0d = %0d^%0d = %0d", 
+                 R, M, N, R*M, N, (R*M)**N);
+        $display("Expected output: %0d x %0d = %0d", 
+                 16'h1000, (R*M)**N, 16'h1000 * (R*M)**N);
+        $display("Expected hex: 0x%08h", 16'h1000 * (R*M)**N);
+        
         rstN = 1;
-        adcData = 16'h1000;
+        adcData = 16'h1000;  // 4096 decimal
         
-        // Wait for steady state
-        repeat(100) @(posedge clkADC);
-        
-        // ========== TEST 3: SINE WAVE ==========
-        $display("\n==================================================");
-        $display("TEST 3: SINE WAVE INPUT");
-        $display("==================================================");
-        
-        $display("\nParameters:");
-        $display("  DC Offset: 2048 (0x0800)");
-        $display("  Amplitude: 1000");
-        $display("  Period: 32 samples");
-        $display("  Sampling rate: %0d ns period", CLK_ADC_PERIOD);
-        $display("  Decimation: R = %0d", R);
-        $display("  CIC gain: (R*M)^N = %0d", (R*M)**N);
-        
-        // Reset filter for clean start
-        rstN = 0;
+        // Wait a few cycles for CIC to start
         repeat(5) @(posedge clkADC);
-        rstN = 1;
-        repeat(20) @(posedge clkADC);
         
         // Display header
-        $display("\n------------------------------------------------------------");
-        $display("SINE WAVE OUTPUT DATA");
-        $display("------------------------------------------------------------");
-        $display("clkSlow | Time(ns) | Input(hex) | Input(dec) | Output(hex)   | Output(dec)   | Valid");
-        $display("------------------------------------------------------------");
+        $display("\n-------------------------------------------------------");
+        $display("CONSTANT WAVE OUTPUT DATA");
+        $display("-------------------------------------------------------");
+        $display("clkSlow | Time(ns) | cicOut.data (hex) | cicOut.data (dec) | Valid | Ready");
+        $display("--------|----------|-------------------|-------------------|-------|------");
         
-        // Apply sine wave and capture outputs
-        for (int cycle = 0; cycle < 3; cycle++) begin  // 3 full cycles
-            for (int phase = 0; phase < 32; phase++) begin  // 32 samples per cycle
-                real angle, sine_value;
-                integer input_value;
-                
-                // Calculate sine wave sample
-                angle = 2.0 * 3.1415926535 * phase / 32.0;
-                sine_value = 2048.0 + 1000.0 * $sin(angle);
-                input_value = $rtoi(sine_value);
-                
-                // Ensure within 16-bit range
-                if (input_value > 65535) input_value = 65535;
-                if (input_value < 0) input_value = 0;
-                
-                adcData = input_value;
-                @(posedge clkADC);
-                
-                // Wait for and display output when available
-                if (cicOut.valid) begin
-                    $display("clkSlow | %8t | 0x%04h      | %5d       | 0x%08h     | %10d     | %1b",
-                            $time, adcData, adcData, cicOut.data, cicOut.data, cicOut.valid);
-                end
+        // Capture and display outputs for 40 clkSlow cycles
+        for (int i = 0; i < 40; i++) begin
+            @(posedge clkSlow);
+            
+            // Display output when valid
+            $display("%7d | %8t | 0x%08h         | %19d | %1b     | %1b",
+                    i, $time, cicOut.data, cicOut.data, cicOut.valid, cicReady);
+            
+            // Check when output stabilizes
+            if (i > 20 && cicOut.data == cicOut_prev && cicOut.valid) begin
+                $display("Output stabilized at 0x%08h (%0d)", cicOut.data, cicOut.data);
             end
+            cicOut_prev = cicOut.data;
         end
+        
+        // Display final summary
+        $display("\n-------------------------------------------------------");
+        $display("FINAL ANALYSIS");
+        $display("-------------------------------------------------------");
+        $display("Final output value: 0x%08h (%0d)", cicOut.data, cicOut.data);
+        $display("Expected value:     0x%08h (%0d)", 
+                 (16'h1000 * (R*M)**N), (16'h1000 * (R*M)**N));
+        
+        if (cicOut.data == (16'h1000 * (R*M)**N)) begin
+            $display("TEST PASSED: Output matches expected value!");
+        end else begin
+            $display("TEST FAILED: Output differs from expected value");
+            $display(" Difference: %0d", cicOut.data - (16'h1000 * (R*M)**N));
+        end
+        
+        // Wait a bit more then finish
+        repeat(20) @(posedge clkADC);
+        $finish;
     end
 
 endmodule

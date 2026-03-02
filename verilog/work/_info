@@ -7,108 +7,206 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dC:/Users/Peter/Documents/GitHub/Cryo-TIA-LockIN/verilog
+dC:/Users/Peter/Documents/GitHub/Cryo-TIA-LockIN/verilog
+vcic
+Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z1 DXx4 work 10 lockIn_pkg 0 22 @acbZ0IIUPJWnjm3Pm;a41
+DXx4 work 11 cic_sv_unit 0 22 QeDQlcbH_]9eNAR^7lP@<3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
+!i10b 1
+!s100 3KgO8LT^VWN4TkEhZzfWo0
+IMB>MzV``P6m[[0dM:lJg00
+!s105 cic_sv_unit
+S1
+Z3 dC:/Users/leong/Documents/GitHub/Cryo-TIA-LockIN/verilog
+Z4 w1770646425
+Z5 8src/cic.sv
+Z6 Fsrc/cic.sv
+L0 3
+Z7 OV;L;10.5b;63
+Z8 !s108 1770848371.000000
+Z9 !s107 src/cic.sv|
+Z10 !s90 -reportprogress|300|-sv|src/cic.sv|
+!i113 1
+o-sv
+Z11 tCvgOpt 0
+Xcic_sv_unit
+R0
+R1
+VQeDQlcbH_]9eNAR^7lP@<3
+r1
+!s85 0
+31
+!i10b 1
+!s100 ACk<8f?[O8LcA2HTDKhdi0
+IQeDQlcbH_]9eNAR^7lP@<3
+!i103 1
+S1
+R3
+R4
+R5
+R6
+L0 1
+R7
+R8
+R9
+R10
+!i113 1
+o-sv
+R11
+vcic_tb
+R0
+R1
+DXx4 work 14 cic_tb_sv_unit 0 22 CaGfXiE]klTN0<KN;Jz5H0
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 `EHA<9f`Rn<GD8UP[lL>=1
+I?3LoF`R]C602f31zPGRWH3
+!s105 cic_tb_sv_unit
+S1
+R3
+Z12 w1770848501
+Z13 8tb/cic_tb.sv
+Z14 Ftb/cic_tb.sv
+L0 5
+R7
+Z15 !s108 1770848512.000000
+Z16 !s107 tb/cic_tb.sv|
+Z17 !s90 -reportprogress|300|-sv|tb/cic_tb.sv|
+!i113 1
+o-sv
+R11
+Xcic_tb_sv_unit
+R0
+R1
+VCaGfXiE]klTN0<KN;Jz5H0
+r1
+!s85 0
+31
+!i10b 1
+!s100 G8Dg5S3iEGZEdMT=mEo_W1
+ICaGfXiE]klTN0<KN;Jz5H0
+!i103 1
+S1
+R3
+R12
+R13
+R14
+L0 1
+R7
+R15
+R16
+R17
+!i113 1
+o-sv
+R11
 XlockIn_pkg
-Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-!s110 1770603873
+R0
+!s110 1770848150
 !i10b 1
 !s100 K`ci^Ij>Maij<49SnnS[=0
 I@acbZ0IIUPJWnjm3Pm;a41
 V@acbZ0IIUPJWnjm3Pm;a41
 S1
-R0
-w1769894726
+R3
+w1770644842
 8pkg/lockIn_pkg.sv
 Fpkg/lockIn_pkg.sv
 L0 1
-Z2 OV;L;10.5b;63
+R7
 r1
 !s85 0
 31
-Z3 !s108 1770603873.000000
+!s108 1770848150.000000
 !s107 pkg/lockIn_pkg.sv|
 !s90 -reportprogress|300|-sv|pkg/lockIn_pkg.sv|
 !i113 1
 o-sv
-Z4 tCvgOpt 0
+R11
 nlock@in_pkg
 vpolyphase
+R0
 R1
-Z5 DXx4 work 10 lockIn_pkg 0 22 @acbZ0IIUPJWnjm3Pm;a41
-DXx4 work 17 polyphase_sv_unit 0 22 G:fQPOFcfYk:MJ`LM=XiC2
-Z6 VDg1SIo80bB@j0V0VzS_@n1
+DXx4 work 17 polyphase_sv_unit 0 22 54SEZ@gDBAG685=5:gVbO3
+R2
 r1
 !s85 0
 31
 !i10b 1
-!s100 goWDbUlm11;C]eTLHoKXS0
-IJ6IC=lm9PU>`Q0;RzIHHO3
+!s100 8;P50Y]aKM[gnPj5d5oDe1
+I9AC<0TG?BVh1kRW3]F8o:1
 !s105 polyphase_sv_unit
 S1
-R0
-Z7 w1770603106
-Z8 8src/polyphase.sv
-Z9 Fsrc/polyphase.sv
-L0 3
-R2
 R3
-Z10 !s107 src/polyphase.sv|
-Z11 !s90 -reportprogress|300|-sv|src/polyphase.sv|
+Z18 w1770652026
+Z19 8src/polyphase.sv
+Z20 Fsrc/polyphase.sv
+L0 3
+R7
+Z21 !s108 1770652065.000000
+Z22 !s107 src/polyphase.sv|
+Z23 !s90 -reportprogress|300|-sv|src/polyphase.sv|
 !i113 1
 o-sv
-R4
+R11
 Xpolyphase_sv_unit
+R0
 R1
-R5
-VG:fQPOFcfYk:MJ`LM=XiC2
+V54SEZ@gDBAG685=5:gVbO3
 r1
 !s85 0
 31
 !i10b 1
-!s100 1fBE=`6e=G0AM]4cDgZKh0
-IG:fQPOFcfYk:MJ`LM=XiC2
+!s100 j[JDdZjlQ>k?zC=[k7:XS1
+I54SEZ@gDBAG685=5:gVbO3
 !i103 1
 S1
-R0
-R7
-R8
-R9
-L0 1
-R2
 R3
-R10
-R11
+R18
+R19
+R20
+L0 1
+R7
+R21
+R22
+R23
 !i113 1
 o-sv
-R4
+R11
 vpolyphase_tb
+R0
 R1
-R5
 DXx4 work 20 polyphase_tb_sv_unit 0 22 [CzGPPAT^zg_bdWQ:U6fg1
-R6
+R2
 r1
 !s85 0
 31
 !i10b 1
-!s100 JSfWCRRODUPVQT`U[HVJ51
-IAZiF?zn<BN:QA[z<5Eg`02
+!s100 m5BUiNYP0hlEVkTh]Of?O1
+ImG9I82J0fZoRSfoITTGVH0
 !s105 polyphase_tb_sv_unit
 S1
-R0
-Z12 w1770603852
-Z13 8tb/polyphase_tb.sv
-Z14 Ftb/polyphase_tb.sv
-L0 5
-R2
 R3
-Z15 !s107 tb/polyphase_tb.sv|
-Z16 !s90 -reportprogress|300|-sv|tb/polyphase_tb.sv|
+Z24 w1770652155
+Z25 8tb/polyphase_tb.sv
+Z26 Ftb/polyphase_tb.sv
+L0 5
+R7
+Z27 !s108 1770848151.000000
+Z28 !s107 tb/polyphase_tb.sv|
+Z29 !s90 -reportprogress|300|-sv|tb/polyphase_tb.sv|
 !i113 1
 o-sv
-R4
+R11
 Xpolyphase_tb_sv_unit
+R0
 R1
-R5
 V[CzGPPAT^zg_bdWQ:U6fg1
 r1
 !s85 0
@@ -118,15 +216,15 @@ r1
 I[CzGPPAT^zg_bdWQ:U6fg1
 !i103 1
 S1
-R0
-R12
-R13
-R14
-L0 1
-R2
 R3
-R15
-R16
+R24
+R25
+R26
+L0 1
+R7
+R27
+R28
+R29
 !i113 1
 o-sv
-R4
+R11
