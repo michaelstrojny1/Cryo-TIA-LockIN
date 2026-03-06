@@ -13,7 +13,7 @@ module integrate #(
     logic [$clog2(SAMPLES)-1:0]         count;
 
     // Accumulate input mixed signal
-    always_ff @(posedge clk or negedge reset) begin
+    always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
             accumulate  <= 0;
             count       <= 0;
@@ -25,7 +25,7 @@ module integrate #(
             if (count == SAMPLES - 1) begin
                 
                 // Divide by number of samples to compute average
-                dataOut     <= accumulate >>> $clog2(SAMPLES)
+                dataOut     <= accumulate >>> $clog2(SAMPLES);
                 accumulate  <= 0;
                 count       <= 0;
             end
