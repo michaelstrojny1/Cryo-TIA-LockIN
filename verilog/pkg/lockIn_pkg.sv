@@ -49,24 +49,3 @@ package lockIn_pkg;
     } lockInOutputT;
 
 endpackage
-
-// // Function to compute magnitude
-// function logic [31:0] computeMagnitudeSq(
-//     input accumT I,
-//     input accumT Q
-// );
-//     long_accumT I_sq = I * I;
-//     long_accumT Q_sq = Q * Q;
-//     long_accumT sum = I_sq[31:0] + Q_sq[31:0]
-//     return sum;
-// endfunction
-
-// function logic [15:0] computePhaseApprox(
-//     input accumT I,
-//     input accumT Q
-// );
-//     if (I >= 0 && Q >= 0) return 16'h0000;  // 0-90 degrees
-//     if (I < 0 && Q >= 0)  return 16'h0000;  // 90-180 degrees
-//     if (I < 0 && Q < 0)   return 16'h0000;  // 180-270 degrees 
-//     return 16'hC000;                        // 270-360 degrees
-// endfunction

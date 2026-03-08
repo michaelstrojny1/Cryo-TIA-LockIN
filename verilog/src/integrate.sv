@@ -1,5 +1,5 @@
 module integrate #(
-    parameter WIDTH     = 32, 
+    parameter WIDTH     = 16, 
     parameter SAMPLES   = 1024
 )(
     input   logic               clk,

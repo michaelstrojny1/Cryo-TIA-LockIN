@@ -45,7 +45,6 @@ simulation/
 *.vho
 
 # Memory initialization files (unless they are source)
-*.hex
 *.mif
 *.rif
 
