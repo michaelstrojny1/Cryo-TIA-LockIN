@@ -41,11 +41,11 @@ package lockIn_pkg;
 
     // Lock-in Output
     typedef struct {
-        accumT  magnitude;
-        accumT  phase;
-        accumT  I;
-        accumT  Q;
-        logic   valid;
+        accumT      magnitude;
+        phaseAngleT phase;
+        accumT      I;
+        accumT      Q;
+        logic       valid;
     } lockInOutputT;
 
 endpackage

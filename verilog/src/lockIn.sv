@@ -9,7 +9,7 @@ module lockIn #(
     input   sampleT         sampleIn,
     input   logic           validIn,
 
-    output  lockInOutputT   Out
+    output  lockInOutputT   dataOut
 );
 
     // Inter-module signals
@@ -18,8 +18,8 @@ module lockIn #(
     accumT I_int;
     accumT Q_int;
 
-    accumT magnitude_val;
-    accumT phase_val;
+    accumT      magnitude_val;
+    phaseAngleT phase_val;
 
     logic  valid_int;
 
@@ -79,10 +79,10 @@ module lockIn #(
     );
 
     // Output assignment
-    assign Out.magnitude = magnitude_val;
-    assign Out.phase     = phase_val;
-    assign Out.I         = I_int;
-    assign Out.Q         = Q_int;
-    assign Out.valid     = valid_int;
+    assign dataOut.magnitude = magnitude_val;
+    assign dataOut.phase     = phase_val;
+    assign dataOut.I         = I_int;
+    assign dataOut.Q         = Q_int;
+    assign dataOut.valid     = valid_int;
 
 endmodule
