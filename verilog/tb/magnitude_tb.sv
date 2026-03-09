@@ -2,7 +2,7 @@
 
 import lockIn_pkg::*;
 
-module magnitude_tb
+module magnitude_tb;
 
     // DUT signals
     accumT      I;
@@ -25,28 +25,28 @@ module magnitude_tb
         I = 10;
         Q = 5;
         #1;
-        $display("I = %4d | Q = %4d | magOut = (%2b)",
+        $display("I = %4d | Q = %4d | magOut = (%3d)",
                  I, Q, magOut);
         
         // Quadrant II (-,+)
         I = -10;
         Q = 5;
         #1;
-        $display("I = %4d | Q = %4d | magOut = (%2b)",
+        $display("I = %4d | Q = %4d | magOut = (%3d)",
                  I, Q, magOut);
 
         // Quadrant III (-,-)
         I = -10;
         Q = -5;
         #1;
-        $display("I = %4d | Q = %4d | magOut = (%2b)",
+        $display("I = %4d | Q = %4d | magOut = (%3d)",
                  I, Q, magOut);
 
         // Quadrant IV (+,-)
         I = 10;
         Q = -5;
         #1;
-        $display("I = %4d | Q = %4d | magOut = (%2b)",
+        $display("I = %4d | Q = %4d | magOut = (%3d)",
                  I, Q, magOut);
 
         // Edge cases
@@ -54,17 +54,17 @@ module magnitude_tb
 
         I = 0; Q = 5;
         #1;
-        $display("I = %4d | Q = %4d | magOut = (%2b)",
+        $display("I = %4d | Q = %4d | magOut = (%3d)",
                  I, Q, magOut);
 
         I = 5; Q = 0;
         #1;
-        $display("I = %4d | Q = %4d | magOut = (%2b)",
+        $display("I = %4d | Q = %4d | magOut = (%3d)",
                  I, Q, magOut);
 
         I = 0; Q = 0;
         #1;
-        $display("I = %4d | Q = %4d | magOut = (%2b)",
+        $display("I = %4d | Q = %4d | magOut = (%3d)",
                  I, Q, magOut);
 
         $display("\n========================================");

@@ -7,12 +7,12 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-dC:/Users/Peter/Documents/GitHub/Cryo-TIA-LockIN/verilog
+Z0 dC:/Users/Peter/Documents/GitHub/Cryo-TIA-LockIN/verilog
 vcic
-Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 DXx4 work 10 lockIn_pkg 0 22 @acbZ0IIUPJWnjm3Pm;a41
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 DXx4 work 10 lockIn_pkg 0 22 @acbZ0IIUPJWnjm3Pm;a41
 DXx4 work 11 cic_sv_unit 0 22 QeDQlcbH_]9eNAR^7lP@<3
-Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 31
@@ -21,21 +21,21 @@ r1
 IMB>MzV``P6m[[0dM:lJg00
 !s105 cic_sv_unit
 S1
-Z3 dC:/Users/leong/Documents/GitHub/Cryo-TIA-LockIN/verilog
-Z4 w1770646425
-Z5 8src/cic.sv
-Z6 Fsrc/cic.sv
+Z4 dC:/Users/leong/Documents/GitHub/Cryo-TIA-LockIN/verilog
+Z5 w1770646425
+Z6 8src/cic.sv
+Z7 Fsrc/cic.sv
 L0 3
-Z7 OV;L;10.5b;63
-Z8 !s108 1770848371.000000
-Z9 !s107 src/cic.sv|
-Z10 !s90 -reportprogress|300|-sv|src/cic.sv|
+Z8 OV;L;10.5b;63
+Z9 !s108 1770848371.000000
+Z10 !s107 src/cic.sv|
+Z11 !s90 -reportprogress|300|-sv|src/cic.sv|
 !i113 1
 o-sv
-Z11 tCvgOpt 0
+Z12 tCvgOpt 0
 Xcic_sv_unit
-R0
 R1
+R2
 VQeDQlcbH_]9eNAR^7lP@<3
 r1
 !s85 0
@@ -45,23 +45,23 @@ r1
 IQeDQlcbH_]9eNAR^7lP@<3
 !i103 1
 S1
-R3
 R4
 R5
 R6
-L0 1
 R7
+L0 1
 R8
 R9
 R10
+R11
 !i113 1
 o-sv
-R11
+R12
 vcic_tb
-R0
 R1
-DXx4 work 14 cic_tb_sv_unit 0 22 CaGfXiE]klTN0<KN;Jz5H0
 R2
+DXx4 work 14 cic_tb_sv_unit 0 22 CaGfXiE]klTN0<KN;Jz5H0
+R3
 r1
 !s85 0
 31
@@ -70,21 +70,21 @@ r1
 I?3LoF`R]C602f31zPGRWH3
 !s105 cic_tb_sv_unit
 S1
-R3
-Z12 w1770848501
-Z13 8tb/cic_tb.sv
-Z14 Ftb/cic_tb.sv
+R4
+Z13 w1770848501
+Z14 8tb/cic_tb.sv
+Z15 Ftb/cic_tb.sv
 L0 5
-R7
-Z15 !s108 1770848512.000000
-Z16 !s107 tb/cic_tb.sv|
-Z17 !s90 -reportprogress|300|-sv|tb/cic_tb.sv|
+R8
+Z16 !s108 1770848512.000000
+Z17 !s107 tb/cic_tb.sv|
+Z18 !s90 -reportprogress|300|-sv|tb/cic_tb.sv|
 !i113 1
 o-sv
-R11
+R12
 Xcic_tb_sv_unit
-R0
 R1
+R2
 VCaGfXiE]klTN0<KN;Jz5H0
 r1
 !s85 0
@@ -94,92 +94,186 @@ r1
 ICaGfXiE]klTN0<KN;Jz5H0
 !i103 1
 S1
-R3
-R12
+R4
 R13
 R14
-L0 1
-R7
 R15
+L0 1
+R8
 R16
 R17
+R18
 !i113 1
 o-sv
-R11
+R12
 vintegrate
-R0
-Z18 !s110 1772829324
+R1
+Z19 !s110 1772829324
 !i10b 1
 !s100 13nXU9bd;kAk]mj2gP`Ph3
 IfOWN[S>93d0eKG6iQdV1<3
-R2
+R3
 !s105 integrate_sv_unit
 S1
-R3
+R4
 w1772829246
 8src/integrate.sv
 Fsrc/integrate.sv
 L0 1
-R7
+R8
 r1
 !s85 0
 31
-Z19 !s108 1772829324.000000
+Z20 !s108 1772829324.000000
 !s107 src/integrate.sv|
 !s90 -reportprogress|300|src/integrate.sv|
 !i113 1
-R11
+R12
 vintegrate_tb
-R0
-R18
+R1
+R19
 !i10b 1
 !s100 3HKHU5^J?`UI_R:TKIi_02
 InIQ?>eJ1:6>`dL<>cO`741
-R2
+R3
 !s105 integrate_tb_sv_unit
 S1
-R3
+R4
 w1772829311
 8tb/integrate_tb.sv
 Ftb/integrate_tb.sv
 L0 3
-R7
+R8
 r1
 !s85 0
 31
-R19
+R20
 !s107 tb/integrate_tb.sv|
 !s90 -reportprogress|300|tb/integrate_tb.sv|
 !i113 1
-R11
+R12
 XlockIn_pkg
-R0
-!s110 1773023035
+R1
+!s110 1773062084
 !i10b 1
 !s100 zPhe`<U5Ri9n0lz2jei062
 I:a<6L[W>7kJUEgC:=6k@[0
 V:a<6L[W>7kJUEgC:=6k@[0
 S1
-R3
-w1773021572
+R0
+w1773060943
 8pkg/lockIn_pkg.sv
 Fpkg/lockIn_pkg.sv
 L0 1
-R7
+R8
 r1
 !s85 0
 31
-!s108 1773023035.000000
+!s108 1773062084.000000
 !s107 pkg/lockIn_pkg.sv|
 !s90 -reportprogress|300|pkg/lockIn_pkg.sv|
 !i113 1
-R11
+R12
 nlock@in_pkg
-vphase
+vmagnitude
+R1
+Z21 DXx4 work 10 lockIn_pkg 0 22 :a<6L[W>7kJUEgC:=6k@[0
+DXx4 work 17 magnitude_sv_unit 0 22 OXCO24f>C;czBGgE]H5=[0
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 E@hPEAjOX^1WfU;?CD5lS3
+I9U6A:;9Sl7doKY0P>aWZU1
+!s105 magnitude_sv_unit
+S1
 R0
-Z20 DXx4 work 10 lockIn_pkg 0 22 :a<6L[W>7kJUEgC:=6k@[0
+Z22 w1773061626
+Z23 8src/magnitude.sv
+Z24 Fsrc/magnitude.sv
+L0 3
+R8
+Z25 !s108 1773061998.000000
+Z26 !s107 src/magnitude.sv|
+Z27 !s90 -reportprogress|300|src/magnitude.sv|
+!i113 1
+R12
+Xmagnitude_sv_unit
+R1
+R21
+VOXCO24f>C;czBGgE]H5=[0
+r1
+!s85 0
+31
+!i10b 1
+!s100 4Y]KhT6lf=IfnATjmZcjm3
+IOXCO24f>C;czBGgE]H5=[0
+!i103 1
+S1
+R0
+R22
+R23
+R24
+L0 1
+R8
+R25
+R26
+R27
+!i113 1
+R12
+vmagnitude_tb
+R1
+R21
+DXx4 work 20 magnitude_tb_sv_unit 0 22 BnM1N]IznR_iX]WCTkR@>0
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 2`ZTXJ0LaRz[=a5HNg<_m3
+Ioo7o?=i]3ca[=1lG_CM071
+!s105 magnitude_tb_sv_unit
+S1
+R0
+Z28 w1773062282
+Z29 8tb/magnitude_tb.sv
+Z30 Ftb/magnitude_tb.sv
+L0 5
+R8
+Z31 !s108 1773062299.000000
+Z32 !s107 tb/magnitude_tb.sv|
+Z33 !s90 -reportprogress|300|tb/magnitude_tb.sv|
+!i113 1
+R12
+Xmagnitude_tb_sv_unit
+R1
+R21
+VBnM1N]IznR_iX]WCTkR@>0
+r1
+!s85 0
+31
+!i10b 1
+!s100 Nl7JBnFVZ<P8NY[?@:lYC2
+IBnM1N]IznR_iX]WCTkR@>0
+!i103 1
+S1
+R0
+R28
+R29
+R30
+L0 3
+R8
+R31
+R32
+R33
+!i113 1
+R12
+vphase
+R1
+R21
 DXx4 work 13 phase_sv_unit 0 22 AeWzZZJeBTH:DCTH:h`O=2
-R2
+R3
 r1
 !s85 0
 31
@@ -188,20 +282,20 @@ r1
 I2BheRNELDn7WlLgdZ06?c2
 !s105 phase_sv_unit
 S1
-R3
-Z21 w1773021323
-Z22 8src/phase.sv
-Z23 Fsrc/phase.sv
+R4
+Z34 w1773021323
+Z35 8src/phase.sv
+Z36 Fsrc/phase.sv
 L0 3
-R7
-Z24 !s108 1773023045.000000
-Z25 !s107 src/phase.sv|
-Z26 !s90 -reportprogress|300|src/phase.sv|
+R8
+Z37 !s108 1773023045.000000
+Z38 !s107 src/phase.sv|
+Z39 !s90 -reportprogress|300|src/phase.sv|
 !i113 1
-R11
+R12
 Xphase_sv_unit
-R0
-R20
+R1
+R21
 VAeWzZZJeBTH:DCTH:h`O=2
 r1
 !s85 0
@@ -211,22 +305,22 @@ r1
 IAeWzZZJeBTH:DCTH:h`O=2
 !i103 1
 S1
-R3
-R21
-R22
-R23
+R4
+R34
+R35
+R36
 L0 1
-R7
-R24
-R25
-R26
+R8
+R37
+R38
+R39
 !i113 1
-R11
+R12
 vphase_tb
-R0
-R20
+R1
+R21
 DXx4 work 16 phase_tb_sv_unit 0 22 J8ZR6G@U2dC[KiCDSF39K0
-R2
+R3
 r1
 !s85 0
 31
@@ -235,20 +329,20 @@ r1
 I5PedNLiIl`nnDIPjX[?7Y2
 !s105 phase_tb_sv_unit
 S1
-R3
-Z27 w1773022944
-Z28 8tb/phase_tb.sv
-Z29 Ftb/phase_tb.sv
+R4
+Z40 w1773022944
+Z41 8tb/phase_tb.sv
+Z42 Ftb/phase_tb.sv
 L0 5
-R7
-Z30 !s108 1773023051.000000
-Z31 !s107 tb/phase_tb.sv|
-Z32 !s90 -reportprogress|300|tb/phase_tb.sv|
+R8
+Z43 !s108 1773023051.000000
+Z44 !s107 tb/phase_tb.sv|
+Z45 !s90 -reportprogress|300|tb/phase_tb.sv|
 !i113 1
-R11
+R12
 Xphase_tb_sv_unit
-R0
-R20
+R1
+R21
 VJ8ZR6G@U2dC[KiCDSF39K0
 r1
 !s85 0
@@ -258,22 +352,22 @@ r1
 IJ8ZR6G@U2dC[KiCDSF39K0
 !i103 1
 S1
-R3
-R27
-R28
-R29
+R4
+R40
+R41
+R42
 L0 3
-R7
-R30
-R31
-R32
+R8
+R43
+R44
+R45
 !i113 1
-R11
+R12
 vpolyphase
-R0
 R1
-DXx4 work 17 polyphase_sv_unit 0 22 54SEZ@gDBAG685=5:gVbO3
 R2
+DXx4 work 17 polyphase_sv_unit 0 22 54SEZ@gDBAG685=5:gVbO3
+R3
 r1
 !s85 0
 31
@@ -282,21 +376,21 @@ r1
 I9AC<0TG?BVh1kRW3]F8o:1
 !s105 polyphase_sv_unit
 S1
-R3
-Z33 w1770652026
-Z34 8src/polyphase.sv
-Z35 Fsrc/polyphase.sv
+R4
+Z46 w1770652026
+Z47 8src/polyphase.sv
+Z48 Fsrc/polyphase.sv
 L0 3
-R7
-Z36 !s108 1770652065.000000
-Z37 !s107 src/polyphase.sv|
-Z38 !s90 -reportprogress|300|-sv|src/polyphase.sv|
+R8
+Z49 !s108 1770652065.000000
+Z50 !s107 src/polyphase.sv|
+Z51 !s90 -reportprogress|300|-sv|src/polyphase.sv|
 !i113 1
 o-sv
-R11
+R12
 Xpolyphase_sv_unit
-R0
 R1
+R2
 V54SEZ@gDBAG685=5:gVbO3
 r1
 !s85 0
@@ -306,23 +400,23 @@ r1
 I54SEZ@gDBAG685=5:gVbO3
 !i103 1
 S1
-R3
-R33
-R34
-R35
+R4
+R46
+R47
+R48
 L0 1
-R7
-R36
-R37
-R38
+R8
+R49
+R50
+R51
 !i113 1
 o-sv
-R11
+R12
 vpolyphase_tb
-R0
 R1
-DXx4 work 20 polyphase_tb_sv_unit 0 22 [CzGPPAT^zg_bdWQ:U6fg1
 R2
+DXx4 work 20 polyphase_tb_sv_unit 0 22 [CzGPPAT^zg_bdWQ:U6fg1
+R3
 r1
 !s85 0
 31
@@ -331,21 +425,21 @@ r1
 ImG9I82J0fZoRSfoITTGVH0
 !s105 polyphase_tb_sv_unit
 S1
-R3
-Z39 w1770652155
-Z40 8tb/polyphase_tb.sv
-Z41 Ftb/polyphase_tb.sv
+R4
+Z52 w1770652155
+Z53 8tb/polyphase_tb.sv
+Z54 Ftb/polyphase_tb.sv
 L0 5
-R7
-Z42 !s108 1770848151.000000
-Z43 !s107 tb/polyphase_tb.sv|
-Z44 !s90 -reportprogress|300|-sv|tb/polyphase_tb.sv|
+R8
+Z55 !s108 1770848151.000000
+Z56 !s107 tb/polyphase_tb.sv|
+Z57 !s90 -reportprogress|300|-sv|tb/polyphase_tb.sv|
 !i113 1
 o-sv
-R11
+R12
 Xpolyphase_tb_sv_unit
-R0
 R1
+R2
 V[CzGPPAT^zg_bdWQ:U6fg1
 r1
 !s85 0
@@ -355,15 +449,15 @@ r1
 I[CzGPPAT^zg_bdWQ:U6fg1
 !i103 1
 S1
-R3
-R39
-R40
-R41
+R4
+R52
+R53
+R54
 L0 1
-R7
-R42
-R43
-R44
+R8
+R55
+R56
+R57
 !i113 1
 o-sv
-R11
+R12
