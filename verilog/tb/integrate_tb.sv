@@ -105,14 +105,7 @@ module integrate_tb;
         expected_avg = expected_accum >>> $clog2(SAMPLES);
         $display("Expected average (accumulate >> %0d) = 0x%0h (%0d)", 
                 $clog2(SAMPLES), expected_avg, expected_avg);
-
-        
-        // Additional verification: Check if rounding behavior is as expected
-        $display("\nNote: With alternating 256/257 input:");
-        $display("  - True average: 256.5");
-        $display("  - Shift-based division truncates: %0d", expected_avg);
-        $display("  - Output differs from true average by: %0.1f", 256.5 - expected_avg);
-
+                
         $finish;
     end
     
