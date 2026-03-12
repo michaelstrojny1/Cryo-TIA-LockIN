@@ -6,13 +6,18 @@ module magnitude (
     output longAccumT  magOut
 );
 
-    longAccumT I_sq;
-    longAccumT Q_sq;
+    // ------------------------------------------------------------
+    // Compute signal magnitude squared
+    //
+    // |A|^2 = I^2 + Q^2
+    //
+    // Using magnitude squared avoids expensive square-root
+    // hardware while still representing signal power.
+    // ------------------------------------------------------------
 
     always_comb begin
-        I_sq  = I * I;
-        Q_sq  = Q * Q;
-        magOut = I_sq + Q_sq;
+        magOut = longAccumT'(I) * longAccumT'(I) +
+                 longAccumT'(Q) * longAccumT'(Q);
     end
 
 endmodule
