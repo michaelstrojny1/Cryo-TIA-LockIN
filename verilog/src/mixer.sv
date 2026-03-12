@@ -1,3 +1,5 @@
+import lockIn_pkg::*;
+
 module mixer #(
     parameter integer CLK_FREQ  = 10_000_000,  // 10 MHz system clock
     parameter integer MIX_FREQ  = 6000,        // desired mixing frequency

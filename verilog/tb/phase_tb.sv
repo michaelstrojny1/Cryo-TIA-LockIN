@@ -4,75 +4,104 @@ import lockIn_pkg::*;
 
 module phase_tb;
 
-    // DUT signals
+    // ------------------------------------------------------------
+    // DUT Signals
+    // ------------------------------------------------------------
+
     accumT      I;
     accumT      Q;
     phaseAngleT phaseOut;
 
+    // ------------------------------------------------------------
     // DUT Instantiation
+    // ------------------------------------------------------------
+
     phase dut (
         .I(I),
         .Q(Q),
         .phaseOut(phaseOut)
     );
 
+    // ------------------------------------------------------------
+    // Test helper task
+    // ------------------------------------------------------------
+
+    task run_test(
+        input accumT testI,
+        input accumT testQ,
+        input phaseAngleT expected
+    );
+        begin
+            I = testI;
+            Q = testQ;
+            #1;
+
+            $display("I=%4d | Q=%4d | phase=%s (%2b)",
+                     I, Q, phaseOut.name(), phaseOut);
+
+            if (phaseOut !== expected) begin
+                $display("ERROR: Expected %s but got %s\n",
+                         expected.name(), phaseOut.name());
+            end
+        end
+    endtask
+
+    // ------------------------------------------------------------
     // Test sequence
+    // ------------------------------------------------------------
+
     initial begin
+
         $display("\n========================================");
-        $display("Testing Phase Module");
+        $display("        Testing Phase Module");
         $display("========================================\n");
 
-        // Quadrant I (+,+)
-        I = 10;
-        Q = 5;
-        #1;
-        $display("I = %4d | Q = %4d | phaseOut = %s (%2b)",
-                 I, Q, phaseOut.name(), phaseOut);
+        // --------------------------------------------------------
+        // Quadrant tests
+        // --------------------------------------------------------
 
-        // Quadrant II (-,+)
-        I = -10;
-        Q = 5;
-        #1;
-        $display("I = %4d | Q = %4d | phaseOut = %s (%2b)",
-                 I, Q, phaseOut.name(), phaseOut);
+        $display("---- Quadrant Tests ----");
 
-        // Quadrant III (-,-)
-        I = -10;
-        Q = -5;
-        #1;
-        $display("I = %4d | Q = %4d | phaseOut = %s (%2b)",
-                 I, Q, phaseOut.name(), phaseOut);
+        run_test(10,   5,  PHASE_0);
+        run_test(-10,  5,  PHASE_90);
+        run_test(-10, -5,  PHASE_180);
+        run_test(10,  -5,  PHASE_270);
 
-        // Quadrant IV (+,-)
-        I = 10;
-        Q = -5;
-        #1;
-        $display("I = %4d | Q = %4d | phaseOut = %s (%2b)",
-                 I, Q, phaseOut.name(), phaseOut);
-
+        // --------------------------------------------------------
         // Edge cases
-        $display("\n--- Edge Cases ---");
+        // --------------------------------------------------------
 
-        I = 0; Q = 5;
-        #1;
-        $display("I = %4d | Q = %4d | phaseOut = %s (%2b)",
-                 I, Q, phaseOut.name(), phaseOut);
+        $display("\n---- Edge Cases ----");
 
-        I = 5; Q = 0;
-        #1;
-        $display("I = %4d | Q = %4d | phaseOut = %s (%2b)",
-                 I, Q, phaseOut.name(), phaseOut);
+        run_test(0,  5, PHASE_0);
+        run_test(5,  0, PHASE_0);
+        run_test(0,  0, PHASE_0);
 
-        I = 0; Q = 0;
-        #1;
-        $display("I = %4d | Q = %4d | phaseOut = %s (%2b)",
-                 I, Q, phaseOut.name(), phaseOut);
+        // --------------------------------------------------------
+        // Randomized tests (optional robustness)
+        // --------------------------------------------------------
+
+        $display("\n---- Random Tests ----");
+
+        repeat (10) begin
+            I = $urandom_range(-100,100);
+            Q = $urandom_range(-100,100);
+            #1;
+
+            $display("I=%4d | Q=%4d | phase=%s (%2b)",
+                     I, Q, phaseOut.name(), phaseOut);
+        end
+
+        // --------------------------------------------------------
+        // End simulation
+        // --------------------------------------------------------
 
         $display("\n========================================");
-        $display("Phase Test Complete");
+        $display("        Phase Test Complete");
         $display("========================================\n");
 
         $finish;
+
     end
 
 endmodule
