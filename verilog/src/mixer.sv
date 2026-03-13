@@ -1,7 +1,7 @@
 import lockIn_pkg::*;
 
 module mixer #(
-    parameter integer CLK_FREQ  = 10_000_000,  // 10 MHz system clock
+    parameter integer CLK_FREQ  = 100_000_000, // 100 MHz system clock
     parameter integer MIX_FREQ  = 6000,        // desired mixing frequency
     parameter integer WIDTH     = 32,          // input data width
     parameter integer LUT_SIZE  = 1024,        // sine/cos LUT size
@@ -28,9 +28,13 @@ module mixer #(
     logic signed [LUT_WIDTH-1:0] cosLUT [0:LUT_SIZE-1];
 
     initial begin
-        $readmemh("lut-sin.hex", sinLUT);
-        $readmemh("lut-cos.hex", cosLUT);
+        $readmemh("lutSin.hex", sinLUT);
+        $readmemh("lutCos.hex", cosLUT);
+
+        $display("sinLUT[0] = %0d", sinLUT[0]);
+        $display("cosLUT[0] = %0d", cosLUT[0]);
     end
+
 
     // ------------------------------------------------------------
     // Internal signals
@@ -64,8 +68,8 @@ module mixer #(
                 clkDivide <= DIV-1;
 
                 // Multiply input by reference sin/cos
-                multI = dataIn * sinLUT[phaseIndex];
-                multQ = dataIn * cosLUT[phaseIndex];
+                multI <= dataIn * sinLUT[phaseIndex];
+                multQ <= dataIn * cosLUT[phaseIndex];
 
                 // Scale result back down
                 dataOut.I <= multI[WIDTH+LUT_WIDTH-1:LUT_WIDTH];

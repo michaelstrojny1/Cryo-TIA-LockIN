@@ -8,12 +8,12 @@ module mixer_tb;
     // Parameters (match DUT defaults)
     // ------------------------------------------------------------
 
-    localparam CLK_FREQ = 10_000_000;
+    localparam CLK_FREQ = 100_000_000;
     localparam MIX_FREQ = 6000;
     localparam WIDTH    = 32;
 
-    // Clock period (100 MHz example simulation clock)
-    localparam CLK_PERIOD = 100;
+    // Clock period (100 MHz simulation clock)
+    localparam CLK_PERIOD = 10;
 
     // ------------------------------------------------------------
     // DUT Signals
@@ -54,13 +54,16 @@ module mixer_tb;
     real phase;
     real freq;
     real sample;
-    int  amplitude = 10000;
+
+    int amplitude = 10000;
 
     initial begin
 
-        $display("\n===============================");
+        $display("\n==============================================");
         $display("Mixer Testbench Starting");
-        $display("===============================\n");
+        $display("==============================================\n");
+
+        $display("time\tinput\tI\tQ\tphaseIdx\tclkDiv\tmultI\tmultQ");
 
         reset = 1;
         dataIn = 0;
@@ -72,7 +75,7 @@ module mixer_tb;
         reset = 0;
 
         // Run simulation for many cycles
-        repeat (20000) begin
+        repeat (20) begin
 
             @(posedge clk);
 
@@ -98,11 +101,15 @@ module mixer_tb;
         if (dataOut.valid) begin
 
             $display(
-                "t=%0t | In=%0d | I=%0d | Q=%0d",
+                "%0t\t%0d\t%0d\t%0d\t%0d\t%0d\t%0d\t%0d",
                 $time,
                 dataIn,
                 dataOut.I,
-                dataOut.Q
+                dataOut.Q,
+                dut.phaseIndex,
+                dut.clkDivide,
+                dut.multI,
+                dut.multQ
             );
 
         end
