@@ -1,3 +1,12 @@
+// vlog pkg/lockIn_pkg.sv
+// vlog src/mixer.sv
+// vlog src/integrate.sv
+// vlog src/magnitude.sv
+// vlog src/phase.sv
+// vlog src/lockIn.sv
+// vlog tb/lockIn_tb.sv
+// vsim -novopt lockIn_tb
+
 `timescale 1ns/1ps
 
 import lockIn_pkg::*;
@@ -78,7 +87,7 @@ module lockIn_tb;
             // Generate test sine input
             phase += 2.0 * 3.1415926535 * freq / CLK_FREQ;
             sample = amplitude * $sin(phase);
-            sampleIn.data = $rtoi(sample);
+            sampleIn = $rtoi(sample);
 
             // Mark input valid every cycle
             validIn = 1;
@@ -97,7 +106,7 @@ module lockIn_tb;
             $display(
                 "%0t\t%0d\t%0d\t%0d\t%0d\t%0d\t%0d",
                 $time,
-                sampleIn.data,
+                sampleIn,
                 dataOut.I,
                 dataOut.Q,
                 dataOut.magnitude,
