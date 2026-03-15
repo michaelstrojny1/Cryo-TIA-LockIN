@@ -40,7 +40,7 @@ module integrate #(
             accumulate <= 0;
             count      <= 0;
             dataOut    <= 0;
-            valid      <= 0;
+            validOut   <= 0;
         end
         else if (validIn) begin
 
