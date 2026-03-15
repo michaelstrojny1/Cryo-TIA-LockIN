@@ -2,111 +2,130 @@
 
 module integrate_tb;
 
-    // Testbench parameters
-    localparam int WIDTH        = 32;
-    localparam int SAMPLES      = 1024;
-    localparam int CLK_PERIOD   = 10;
+    // ------------------------------------------------------------
+    // Parameters
+    // ------------------------------------------------------------
 
-    // Clock generation
+    localparam int WIDTH      = 16;
+    localparam int SAMPLES    = 1024;
+    localparam int CLK_PERIOD = 10;
+
+    // ------------------------------------------------------------
+    // Clock
+    // ------------------------------------------------------------
+
     logic clk = 0;
     always #(CLK_PERIOD/2) clk = ~clk;
 
+    // ------------------------------------------------------------
     // DUT signals
-    logic               reset;
-    logic [WIDTH-1:0]   dataIn;
-    logic [WIDTH-1:0]   dataOut;
+    // ------------------------------------------------------------
 
-    // Internal signals for monitoring
-    logic [WIDTH + $clog2(SAMPLES)-1:0] accumulate;
-    logic [$clog2(SAMPLES)-1:0]         count;
+    logic                     reset;
+    logic                     validIn;
+    logic signed [WIDTH-1:0]  dataIn;
 
-    // DUT instantiation
+    logic signed [WIDTH-1:0]  dataOut;
+    logic                     validOut;
+
+    // ------------------------------------------------------------
+    // Monitor internal DUT signals
+    // ------------------------------------------------------------
+
+    logic signed [WIDTH + $clog2(SAMPLES)-1:0] accumulate;
+    logic [$clog2(SAMPLES)-1:0] count;
+
+    assign accumulate = dut.accumulate;
+    assign count      = dut.count;
+
+    // ------------------------------------------------------------
+    // DUT
+    // ------------------------------------------------------------
+
     integrate #(
         .WIDTH(WIDTH),
         .SAMPLES(SAMPLES)
     ) dut (
-        .clk(clk),
-        .reset(reset),
-        .dataIn(dataIn),
-        .dataOut(dataOut)
+        .clk        (clk),
+        .reset      (reset),
+        .validIn    (validIn),
+        .dataIn     (dataIn),
+        .dataOut    (dataOut),
+        .validOut   (validOut)
     );
 
-    // Connect internal signals
-    assign accumulate = dut.accumulate;
-    assign count = dut.count;
-
+    // ------------------------------------------------------------
     // Test variables
-    int error_count = 0;
-    logic [WIDTH-1:0] expected_avg;
-    logic [WIDTH + $clog2(SAMPLES)-1:0] expected_accum;
+    // ------------------------------------------------------------
 
-    // Test sequence
+    logic signed [WIDTH-1:0] expected_avg;
+    logic signed [WIDTH + $clog2(SAMPLES)-1:0] expected_accum;
+
+    // ------------------------------------------------------------
+    // Test
+    // ------------------------------------------------------------
+
     initial begin
+
         $display("\n========================================");
-        $display("Testing Integrator Module");
-        $display("Samples: %0d, Width: %0d bits", SAMPLES, WIDTH);
+        $display("Integrator Test");
+        $display("WIDTH=%0d SAMPLES=%0d", WIDTH, SAMPLES);
         $display("========================================\n");
 
-        // Initialize
-        reset = 0;
-        dataIn = 0;
-        
-        // Apply reset
-        repeat (2) @(posedge clk);
-        reset = 1;
-        @(posedge clk);
-        reset = 0;
-        @(posedge clk);
-        
-        $display("Reset complete. Starting test with DC + 1-bit variation...\n");
+        reset   = 1;
+        validIn = 0;
+        dataIn  = 0;
 
-        // Single test: 64 samples alternating between 0x100 and 0x101
-        // This gives an average of (0x100 + 0x101)/2 = 0x100.5 = 256.5
-        // For 64 samples, total accumulate should be 64 * 256.5 = 16416 (0x4020)
-        // Shift right by 6 (log2(64)) gives 16416/64 = 256.5, but integer output will be 256 or 257
-        
-        $display("Input pattern: Alternating between 0x100 (256) and 0x101 (257)");
-        $display("Expected average: 256.5 (rounded to nearest integer by shift)\n");
-        
-        $display("Sample-by-sample accumulation:");
-        $display("-------------------------------");
-        
-        for (int i = 0; i < SAMPLES; i++) begin
-            @(posedge clk);
-            
-            // Generate alternating pattern
-            dataIn = 32'h00000100 + (i % 2);
-            
-            // Display progress
-            $display("Sample %2d: dataIn=0x%0h (%3d) | count=%2d | accumulate=0x%0h (%5d)", 
-                    i, dataIn, dataIn, count, accumulate, accumulate);
-        end
-        
-        // Wait for output to be calculated (the output is updated on the same clock
-        // edge as the last sample, but we need to wait one more cycle to see it)
+        repeat (3) @(posedge clk);
+
+        reset = 0;
         @(posedge clk);
-        
-        $display("\n-------------------------------");
-        $display("\n=== Results ===");
-        $display("Final accumulate before output = 0x%0h (%0d)", accumulate, accumulate);
-        $display("Final count = %0d", count);
-        $display("dataOut = 0x%0h (%0d)", dataOut, dataOut);
-        
-        // Calculate expected values
-        expected_accum = 0;
+
+        validIn = 1;
+
+        $display("Applying alternating inputs...\n");
+
         for (int i = 0; i < SAMPLES; i++) begin
-            expected_accum += 32'h00000100 + (i % 2);
+
+            dataIn = 16'sh0100 + (i % 2);
+
+            @(posedge clk);
+
+            $display("i=%4d data=%4d count=%4d accum=%8d",
+                     i, dataIn, count, accumulate);
         end
-        
-        $display("\n=== Expected Calculations ===");
-        $display("Expected accumulate total = 0x%0h (%0d)", expected_accum, expected_accum);
-        
-        // Right shift by log2(SAMPLES) = 6 for 64 samples
+
+        // Wait for output
+        @(posedge clk);
+
+        $display("\n===============================");
+        $display("Integrator Output");
+        $display("===============================");
+
+        $display("dataOut  = %0d", dataOut);
+        $display("validOut = %0d", validOut);
+
+        // ------------------------------------------------------------
+        // Expected value calculation
+        // ------------------------------------------------------------
+
+        expected_accum = 0;
+
+        for (int i = 0; i < SAMPLES; i++)
+            expected_accum += 16'sh0100 + (i % 2);
+
         expected_avg = expected_accum >>> $clog2(SAMPLES);
-        $display("Expected average (accumulate >> %0d) = 0x%0h (%0d)", 
-                $clog2(SAMPLES), expected_avg, expected_avg);
-                
+
+        $display("\nExpected:");
+        $display("accum = %0d", expected_accum);
+        $display("avg   = %0d", expected_avg);
+
+        if (dataOut == expected_avg)
+            $display("\nTEST PASSED");
+        else
+            $display("\nTEST FAILED");
+
         $finish;
     end
-    
+
 endmodule

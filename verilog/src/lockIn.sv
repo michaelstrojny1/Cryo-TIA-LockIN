@@ -6,7 +6,7 @@ module lockIn #(
     input   logic           clk,
     input   logic           reset,
 
-    input   sampleT         sampleIn,
+    input   sampleT         dataIn,
     input   logic           validIn,
 
     output  lockInOutputT   dataOut
@@ -28,12 +28,8 @@ module lockIn #(
         .clk    (clk),
         .reset  (reset),
 
-        .sample (sampleIn),
-        .valid  (validIn),
-
-        .I      (mixerOut.I),
-        .Q      (mixerOut.Q),
-        .validOut(mixerOut.valid)
+        .dataIn (sampleIn),
+        .dataOut(mixerOut)
     );
 
     // Integrate I

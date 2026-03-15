@@ -6,6 +6,7 @@
 // vlog src/lockIn.sv
 // vlog tb/lockIn_tb.sv
 // vsim -novopt lockIn_tb
+// run -all
 
 `timescale 1ns/1ps
 
@@ -42,7 +43,7 @@ module lockIn_tb;
     lockIn dut (
         .clk      (clk),
         .reset    (reset),
-        .sampleIn (sampleIn),
+        .dataIn   (sampleIn),
         .validIn  (validIn),
         .dataOut  (dataOut)
     );

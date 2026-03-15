@@ -4,10 +4,11 @@ module integrate #(
 )(
     input  logic                     clk,
     input  logic                     reset,
+    input  logic                     validIn,
     input  logic signed [WIDTH-1:0]  dataIn,
 
     output logic signed [WIDTH-1:0]  dataOut,
-    output logic                     valid
+    output logic                     validOut
 );
 
     // ------------------------------------------------------------
@@ -29,7 +30,7 @@ module integrate #(
     // Boxcar integration / averaging
     //
     // Computes:
-    //      y = (1/N) * Σ x[n]
+    //      y = (1/N) * Sigma x[n]
     //
     // Output is produced once every SAMPLES clock cycles.
     // ------------------------------------------------------------
@@ -41,7 +42,7 @@ module integrate #(
             dataOut    <= 0;
             valid      <= 0;
         end
-        else begin
+        else if (validIn) begin
 
             // Compute next accumulation
             next_accumulate = accumulate + dataIn;
@@ -50,7 +51,7 @@ module integrate #(
 
                 // Average result
                 dataOut <= next_accumulate >>> EXTRA_BITS;
-                valid   <= 1;
+                validOut   <= 1;
 
                 // Reset window
                 accumulate <= 0;
@@ -61,7 +62,7 @@ module integrate #(
 
                 accumulate <= next_accumulate;
                 count      <= count + 1;
-                valid      <= 0;
+                validOut   <= 0;
 
             end
         end
