@@ -21,12 +21,14 @@ module phase (
     // ------------------------------------------------------------
 
     always_comb begin
-        unique case ({signI, signQ})
+        case ({signI, signQ})
 
             2'b00: phaseOut = PHASE_0;     // I ≥ 0, Q ≥ 0
             2'b10: phaseOut = PHASE_90;    // I < 0, Q ≥ 0
             2'b11: phaseOut = PHASE_180;   // I < 0, Q < 0
             2'b01: phaseOut = PHASE_270;   // I ≥ 0, Q < 0
+
+            default: phaseOut = '0;
 
         endcase
     end

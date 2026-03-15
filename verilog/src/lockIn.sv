@@ -17,9 +17,11 @@ module lockIn #(
 
     accumT I_int;
     accumT Q_int;
+    logic       I_validOut;
+    logic       Q_validOut;
 
-    accumT      magnitude_val;
-    phaseAngleT phase_val;
+    longaccumT      magnitude_val;
+    phaseAngleT     phase_val;
 
     logic  valid_int;
 
@@ -42,7 +44,7 @@ module lockIn #(
         .validIn (mixerOut.valid),
         .dataIn  (mixerOut.I),
 
-        .validOut(valid_int),
+        .validOut(I_validOut),
         .dataOut (I_int)
     );
 
@@ -56,7 +58,7 @@ module lockIn #(
         .validIn (mixerOut.valid),
         .dataIn  (mixerOut.Q),
 
-        .validOut(),
+        .validOut(Q_validOut),
         .dataOut (Q_int)
     );
 
