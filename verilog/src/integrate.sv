@@ -30,7 +30,7 @@ module integrate #(
     // ------------------------------------------------------------
     // Boxcar Integrator
     //
-    // y = (1/N) Σ x[n]
+    // y = (1/N) Sigma x[n]
     // ------------------------------------------------------------
 
     always_ff @(posedge clk or posedge reset) begin
