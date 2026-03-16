@@ -17,8 +17,8 @@ module lockIn #(
 
     accumT I_int;
     accumT Q_int;
-    logic       I_validOut;
-    logic       Q_validOut;
+    logic  I_validOut;
+    logic  Q_validOut;
 
     longaccumT      magnitude_val;
     phaseAngleT     phase_val;

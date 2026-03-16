@@ -1,22 +1,23 @@
 module integrate #(
-    parameter int WIDTH   = 16,
     parameter int SAMPLES = 1024
 )(
-    input  logic                     clk,
-    input  logic                     reset,
-    input  logic                     validIn,
-    input  logic signed [WIDTH-1:0]  dataIn,
+    input  logic  clk,
+    input  logic  reset,
+    input  logic  validIn,
 
-    output logic signed [WIDTH-1:0]  dataOut,
-    output logic                     validOut
+    input  accumT dataIn,
+
+    output accumT dataOut,
+    output logic  validOut
 );
 
     // ------------------------------------------------------------
-    // Derived parameters
+    // Constants
     // ------------------------------------------------------------
 
+    localparam int DATA_WIDTH = 32;
     localparam int EXTRA_BITS = $clog2(SAMPLES);
-    localparam int ACC_WIDTH  = WIDTH + EXTRA_BITS;
+    localparam int ACC_WIDTH  = DATA_WIDTH + EXTRA_BITS;
 
     // ------------------------------------------------------------
     // Internal state
@@ -27,35 +28,32 @@ module integrate #(
     logic [EXTRA_BITS-1:0]       count;
 
     // ------------------------------------------------------------
-    // Boxcar integration / averaging
+    // Boxcar Integrator
     //
-    // Computes:
-    //      y = (1/N) * Sigma x[n]
-    //
-    // Output is produced once every SAMPLES clock cycles.
+    // y = (1/N) Σ x[n]
     // ------------------------------------------------------------
 
     always_ff @(posedge clk or posedge reset) begin
+
         if (reset) begin
-            accumulate <= 0;
-            count      <= 0;
-            dataOut    <= 0;
+            accumulate <= '0;
+            count      <= '0;
+            dataOut    <= '0;
             validOut   <= 0;
         end
+
         else if (validIn) begin
 
-            // Compute next accumulation
             next_accumulate = accumulate + dataIn;
 
             if (count == SAMPLES-1) begin
 
-                // Average result
-                dataOut <= next_accumulate >>> EXTRA_BITS;
-                validOut   <= 1;
+                // average
+                dataOut  <= next_accumulate >>> EXTRA_BITS;
+                validOut <= 1;
 
-                // Reset window
-                accumulate <= 0;
-                count      <= 0;
+                accumulate <= '0;
+                count      <= '0;
 
             end
             else begin
