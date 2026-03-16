@@ -78,7 +78,7 @@ module phase_tb;
         run_test(0,  0, PHASE_0);
 
         // --------------------------------------------------------
-        // Randomized tests (optional robustness)
+        // Randomized tests
         // --------------------------------------------------------
 
         $display("\n---- Random Tests ----");

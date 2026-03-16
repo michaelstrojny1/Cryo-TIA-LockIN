@@ -79,7 +79,7 @@ module lockIn (
 
         .I          (I_int),
         .Q          (Q_int),
-        .magOut     (magnitude_val),
+        .magOut     (magnitude_val)
 
     );
 
