@@ -1,86 +1,116 @@
 import lockIn_pkg::*;
 
-module lockIn #(
+module lockIn (
 
-) (
-    input   logic           clk,
-    input   logic           reset,
+    input  logic          clk,
+    input  logic          reset,
 
-    input   sampleT         dataIn,
-    input   logic           validIn,
+    input  sampleT        dataIn,
+    input  logic          validIn,
 
-    output  lockInOutputT   dataOut
+    output lockInOutputT  dataOut
+
 );
 
-    // Inter-module signals
+    // ------------------------------------------------------------
+    // Inter-Module Signals
+    // ------------------------------------------------------------
+
     mixerOutputT mixerOut;
 
     accumT I_int;
     accumT Q_int;
+
     logic  I_validOut;
     logic  Q_validOut;
 
-    longaccumT      magnitude_val;
-    phaseAngleT     phase_val;
+    longAccumT  magnitude_val;
+    phaseAngleT phase_val;
 
-    logic  valid_int;
+    logic valid_int;
 
-    // Mixer
-    mixer u1 (
+    // ------------------------------------------------------------
+    // Mixer Stage
+    // ------------------------------------------------------------
+
+    mixer u_mixer (
         .clk    (clk),
         .reset  (reset),
 
-        .dataIn (sampleIn),
+        .dataIn (dataIn),
         .dataOut(mixerOut)
     );
 
-    // Integrate I
-    integrate #(
-        .WIDTH   ($bits(accumT)),
-        .SAMPLES ()
-    ) integrate_cos (
+    // ------------------------------------------------------------
+    // Integration Stage
+    // ------------------------------------------------------------
+
+    integrate integrate_cos (
+
         .clk     (clk),
         .reset   (reset),
+
         .validIn (mixerOut.valid),
         .dataIn  (mixerOut.I),
 
-        .validOut(I_validOut),
-        .dataOut (I_int)
+        .dataOut (I_int),
+        .validOut(I_validOut)
+
     );
 
-    // Integrate Q
-    integrate #(
-        .WIDTH   ($bits(accumT)),
-        .SAMPLES ()
-    ) integrate_sin (
+    integrate integrate_sin (
+
         .clk     (clk),
         .reset   (reset),
+
         .validIn (mixerOut.valid),
         .dataIn  (mixerOut.Q),
 
-        .validOut(Q_validOut),
-        .dataOut (Q_int)
+        .dataOut (Q_int),
+        .validOut(Q_validOut)
+
     );
 
-    // Magnitude
+    // ------------------------------------------------------------
+    // Magnitude Computation
+    // ------------------------------------------------------------
+
     magnitude u_mag (
+
         .I      (I_int),
         .Q      (Q_int),
         .magOut (magnitude_val)
+
     );
 
-    // Phase
+    // ------------------------------------------------------------
+    // Phase Computation
+    // ------------------------------------------------------------
+
     phase u_phase (
+
         .I        (I_int),
         .Q        (Q_int),
         .phaseOut (phase_val)
+
     );
 
-    // Output assignment
+    // ------------------------------------------------------------
+    // Output Valid
+    // ------------------------------------------------------------
+
+    assign valid_int = I_validOut & Q_validOut;
+
+    // ------------------------------------------------------------
+    // Output Assignment
+    // ------------------------------------------------------------
+
     assign dataOut.magnitude = magnitude_val;
     assign dataOut.phase     = phase_val;
+
     assign dataOut.I         = I_int;
     assign dataOut.Q         = Q_int;
+
     assign dataOut.valid     = valid_int;
 
 endmodule
