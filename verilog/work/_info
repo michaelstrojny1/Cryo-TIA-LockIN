@@ -7,107 +7,131 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dC:/Users/leong/Documents/GitHub/Cryo-TIA-LockIN/verilog
+Z0 dC:/Users/Peter/Documents/GitHub/Cryo-TIA-LockIN/verilog
 vintegrate
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-!s110 1773618753
+Z2 DXx4 work 10 lockIn_pkg 0 22 1gICEl^k9bEO^QHgoga7J3
+DXx4 work 17 integrate_sv_unit 0 22 8@T]e5=YNT0=]:Y:2><7P2
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
 !i10b 1
-!s100 k]z0BM=>UfGoCFKIVkL1f3
-IYKFA98]4Ye0lc^?ZIP3`31
-Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s100 e=>N40b8n^:C<m:KG9GCz3
+IG<kNd^77FHWGj23GnJ3e_3
 !s105 integrate_sv_unit
 S1
 R0
-w1773618356
-8src/integrate.sv
-Fsrc/integrate.sv
-L0 1
-Z3 OV;L;10.5b;63
-r1
-!s85 0
-31
-!s108 1773618753.000000
-!s107 src/integrate.sv|
-!s90 -reportprogress|300|src/integrate.sv|
-!i113 1
-Z4 tCvgOpt 0
-vlockIn
-R1
-Z5 DXx4 work 10 lockIn_pkg 0 22 S>eNXObW8KOfzI6QoDc[`2
-DXx4 work 14 lockIn_sv_unit 0 22 BE6lH`ifPEIEc[BdL@U[o1
-R2
-r1
-!s85 0
-31
-!i10b 1
-!s100 [K>L5XC9dMF2IVNR4McYf3
-IY5OgRe_LGk6_Eki=hcZI13
-!s105 lockIn_sv_unit
-S1
-Z6 dC:/Users/Peter/Documents/GitHub/Cryo-TIA-LockIN/verilog
-Z7 w1773620175
-Z8 8src/lockIn.sv
-Z9 Fsrc/lockIn.sv
+Z4 w1773620605
+Z5 8src/integrate.sv
+Z6 Fsrc/integrate.sv
 L0 3
-R3
-Z10 !s108 1773620195.000000
-Z11 !s107 src/lockIn.sv|
-Z12 !s90 -reportprogress|300|src/lockIn.sv|
+Z7 OV;L;10.5b;63
+Z8 !s108 1773620936.000000
+Z9 !s107 src/integrate.sv|
+Z10 !s90 -reportprogress|300|src/integrate.sv|
 !i113 1
-R4
-nlock@in
-XlockIn_pkg
+Z11 tCvgOpt 0
+Xintegrate_sv_unit
 R1
-!s110 1773620195
-!i10b 1
-!s100 7aRhg?K3Y1_kgNj:Q=o0S0
-IS>eNXObW8KOfzI6QoDc[`2
-VS>eNXObW8KOfzI6QoDc[`2
-S1
-R6
-w1773620191
-8pkg/lockIn_pkg.sv
-Fpkg/lockIn_pkg.sv
-L0 1
-R3
-r1
-!s85 0
-31
-R10
-!s107 pkg/lockIn_pkg.sv|
-!s90 -reportprogress|300|pkg/lockIn_pkg.sv|
-!i113 1
-R4
-nlock@in_pkg
-XlockIn_sv_unit
-R1
-R5
-VBE6lH`ifPEIEc[BdL@U[o1
+R2
+V8@T]e5=YNT0=]:Y:2><7P2
 r1
 !s85 0
 31
 !i10b 1
-!s100 V=DhVW2XRBIgLz[Wd0KdR2
-IBE6lH`ifPEIEc[BdL@U[o1
+!s100 `CjXR_fT4;9>PBR`KOmDW3
+I8@T]e5=YNT0=]:Y:2><7P2
 !i103 1
 S1
+R0
+R4
+R5
 R6
+L0 1
 R7
 R8
 R9
-L0 1
-R3
 R10
-R11
-R12
 !i113 1
-R4
+R11
+vlockIn
+R1
+R2
+DXx4 work 14 lockIn_sv_unit 0 22 TYdGZo9hQlbaLaXcW7deV2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 L6c=KMIo9i7M:`;WU?aa40
+IEJb:^`Al2T_@oWJb]i4RG2
+!s105 lockIn_sv_unit
+S1
+R0
+Z12 w1773620809
+Z13 8src/lockIn.sv
+Z14 Fsrc/lockIn.sv
+L0 3
+R7
+Z15 !s108 1773620821.000000
+Z16 !s107 src/lockIn.sv|
+Z17 !s90 -reportprogress|300|src/lockIn.sv|
+!i113 1
+R11
+nlock@in
+XlockIn_pkg
+R1
+!s110 1773620936
+!i10b 1
+!s100 ]lYD^ckFn:TJ=[aKm[nZe3
+I1gICEl^k9bEO^QHgoga7J3
+V1gICEl^k9bEO^QHgoga7J3
+S1
+R0
+w1773620254
+8pkg/lockIn_pkg.sv
+Fpkg/lockIn_pkg.sv
+L0 1
+R7
+r1
+!s85 0
+31
+R8
+!s107 pkg/lockIn_pkg.sv|
+!s90 -reportprogress|300|pkg/lockIn_pkg.sv|
+!i113 1
+R11
+nlock@in_pkg
+XlockIn_sv_unit
+R1
+R2
+VTYdGZo9hQlbaLaXcW7deV2
+r1
+!s85 0
+31
+!i10b 1
+!s100 X>4mTEfjcU=lonMfVcWJ[0
+ITYdGZo9hQlbaLaXcW7deV2
+!i103 1
+S1
+R0
+R12
+R13
+R14
+L0 1
+R7
+R15
+R16
+R17
+!i113 1
+R11
 nlock@in_sv_unit
 vlockIn_tb
 R1
-R5
-DXx4 work 17 lockIn_tb_sv_unit 0 22 g<Qf6Uh?MQLg6DT^FaDh90
 R2
+DXx4 work 17 lockIn_tb_sv_unit 0 22 4Q4Id8:WFDBFCKl>[zPZ:0
+R3
 r1
 !s85 0
 31
@@ -116,47 +140,47 @@ r1
 I]W2GIYceo]CfY7Y7>fCL]1
 !s105 lockIn_tb_sv_unit
 S1
-R6
-Z13 w1773620107
-Z14 8tb/lockIn_tb.sv
-Z15 Ftb/lockIn_tb.sv
+R0
+Z18 w1773620900
+Z19 8tb/lockIn_tb.sv
+Z20 Ftb/lockIn_tb.sv
 L0 15
-R3
-R10
-Z16 !s107 tb/lockIn_tb.sv|
-Z17 !s90 -reportprogress|300|tb/lockIn_tb.sv|
+R7
+Z21 !s108 1773620937.000000
+Z22 !s107 tb/lockIn_tb.sv|
+Z23 !s90 -reportprogress|300|tb/lockIn_tb.sv|
 !i113 1
-R4
+R11
 nlock@in_tb
 XlockIn_tb_sv_unit
 R1
-R5
-Vg<Qf6Uh?MQLg6DT^FaDh90
+R2
+V4Q4Id8:WFDBFCKl>[zPZ:0
 r1
 !s85 0
 31
 !i10b 1
 !s100 KE0k]OM<R0oRI9QRb`kjU1
-Ig<Qf6Uh?MQLg6DT^FaDh90
+I4Q4Id8:WFDBFCKl>[zPZ:0
 !i103 1
 S1
-R6
-R13
-R14
-R15
+R0
+R18
+R19
+R20
 L0 13
-R3
-R10
-R16
-R17
+R7
+R21
+R22
+R23
 !i113 1
-R4
+R11
 nlock@in_tb_sv_unit
 vmagnitude
 R1
-R5
-DXx4 work 17 magnitude_sv_unit 0 22 dEONj30B0?f4BA5_:TgKK3
 R2
+DXx4 work 17 magnitude_sv_unit 0 22 GXJozHT^Vf=6AA4d@njCo0
+R3
 r1
 !s85 0
 31
@@ -165,45 +189,45 @@ r1
 I=8kXE`c]=D]<ehbIjf90[0
 !s105 magnitude_sv_unit
 S1
-R6
-Z18 w1773619254
-Z19 8src/magnitude.sv
-Z20 Fsrc/magnitude.sv
+R0
+Z24 w1773620871
+Z25 8src/magnitude.sv
+Z26 Fsrc/magnitude.sv
 L0 3
-R3
-R10
-Z21 !s107 src/magnitude.sv|
-Z22 !s90 -reportprogress|300|src/magnitude.sv|
+R7
+R8
+Z27 !s107 src/magnitude.sv|
+Z28 !s90 -reportprogress|300|src/magnitude.sv|
 !i113 1
-R4
+R11
 Xmagnitude_sv_unit
 R1
-R5
-VdEONj30B0?f4BA5_:TgKK3
+R2
+VGXJozHT^Vf=6AA4d@njCo0
 r1
 !s85 0
 31
 !i10b 1
 !s100 <:>=BMRG;M8WgWVh=k>WR3
-IdEONj30B0?f4BA5_:TgKK3
+IGXJozHT^Vf=6AA4d@njCo0
 !i103 1
 S1
-R6
-R18
-R19
-R20
+R0
+R24
+R25
+R26
 L0 1
-R3
-R10
-R21
-R22
+R7
+R8
+R27
+R28
 !i113 1
-R4
+R11
 vmixer
 R1
-R5
-DXx4 work 13 mixer_sv_unit 0 22 WQXLa3ZZ2;DkOaOlfJEd?3
 R2
+DXx4 work 13 mixer_sv_unit 0 22 G5_9`a<KiP9V:JbGjXMZN1
+R3
 r1
 !s85 0
 31
@@ -212,79 +236,84 @@ r1
 IUmgFHCJ[4KNn>B3nOadJJ0
 !s105 mixer_sv_unit
 S1
-R6
-R18
-Z23 8src/mixer.sv
-Z24 Fsrc/mixer.sv
+R0
+Z29 w1773619254
+Z30 8src/mixer.sv
+Z31 Fsrc/mixer.sv
 L0 3
-R3
-R10
-Z25 !s107 src/mixer.sv|
-Z26 !s90 -reportprogress|300|src/mixer.sv|
+R7
+R8
+Z32 !s107 src/mixer.sv|
+Z33 !s90 -reportprogress|300|src/mixer.sv|
 !i113 1
-R4
+R11
 Xmixer_sv_unit
 R1
-R5
-VWQXLa3ZZ2;DkOaOlfJEd?3
+R2
+VG5_9`a<KiP9V:JbGjXMZN1
 r1
 !s85 0
 31
 !i10b 1
 !s100 hE?PBEB:An3jFQBZbC@LH0
-IWQXLa3ZZ2;DkOaOlfJEd?3
+IG5_9`a<KiP9V:JbGjXMZN1
 !i103 1
 S1
-R6
-R18
-R23
-R24
+R0
+R29
+R30
+R31
 L0 1
-R3
-R10
-R25
-R26
+R7
+R8
+R32
+R33
 !i113 1
-R4
+R11
 vphase
 R1
-!i10b 1
-!s100 fVbR]d>PROhZ1`PjbIN^V0
-I_m_HQn2nU]7YoZlDRJj;a1
 R2
+DXx4 work 13 phase_sv_unit 0 22 m[Od7Mbl:zPgn<BG]em0z1
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 ?RM:N`HB9hSXiIPeQ4Z[V2
+Im]k_O`3Vh79kHM:NHM4O_0
 !s105 phase_sv_unit
 S1
-R6
-R18
-Z27 8src/phase.sv
-Z28 Fsrc/phase.sv
+R0
+Z34 w1773620650
+Z35 8src/phase.sv
+Z36 Fsrc/phase.sv
 L0 3
-R3
-R10
-Z29 !s107 src/phase.sv|
-Z30 !s90 -reportprogress|300|src/phase.sv|
+R7
+R8
+Z37 !s107 src/phase.sv|
+Z38 !s90 -reportprogress|300|src/phase.sv|
 !i113 1
-R4
+R11
 Xphase_sv_unit
 R1
-R5
-VRHP;6E`57imKjW8:<38lP0
+R2
+Vm[Od7Mbl:zPgn<BG]em0z1
 r1
 !s85 0
 31
 !i10b 1
 !s100 F:36and2mgD0z=<P6_Ig>0
-IRHP;6E`57imKjW8:<38lP0
+Im[Od7Mbl:zPgn<BG]em0z1
 !i103 1
 S1
-R6
-R18
-R27
-R28
+R0
+R34
+R35
+R36
 L0 1
-R3
-R10
-R29
-R30
+R7
+R8
+R37
+R38
 !i113 1
-R4
+R11

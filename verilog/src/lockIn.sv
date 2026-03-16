@@ -77,9 +77,9 @@ module lockIn (
 
     magnitude u_mag (
 
-        .I      (I_int),
-        .Q      (Q_int),
-        .magOut (magnitude_val)
+        .I          (I_int),
+        .Q          (Q_int),
+        .magOut     (magnitude_val),
 
     );
 

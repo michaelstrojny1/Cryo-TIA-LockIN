@@ -5,7 +5,7 @@
 // vlog src/phase.sv
 // vlog src/lockIn.sv
 // vlog tb/lockIn_tb.sv
-// vsim -novopt lockIn_tb
+// vsim lockIn_tb
 // run -all
 
 `timescale 1ns/1ps

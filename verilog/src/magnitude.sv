@@ -16,8 +16,8 @@ module magnitude (
     // ------------------------------------------------------------
 
     always_comb begin
-        magOut = longAccumT'(I) * longAccumT'(I) +
-                 longAccumT'(Q) * longAccumT'(Q);
+        magOut    = longAccumT'(I) * longAccumT'(I) +
+                    longAccumT'(Q) * longAccumT'(Q);
     end
 
 endmodule

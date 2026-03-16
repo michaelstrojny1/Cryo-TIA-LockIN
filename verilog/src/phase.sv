@@ -28,7 +28,7 @@ module phase (
             2'b11: phaseOut = PHASE_180;   // I < 0, Q < 0
             2'b01: phaseOut = PHASE_270;   // I ≥ 0, Q < 0
 
-            default: phaseOut = '0;
+            default: phaseOut = PHASE_0;
 
         endcase
     end

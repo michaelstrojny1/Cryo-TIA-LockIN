@@ -1,3 +1,5 @@
+import lockIn_pkg::*;
+
 module integrate #(
     parameter int SAMPLES = 1024
 )(
