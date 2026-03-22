@@ -1,3 +1,9 @@
+// vlog pkg/lockIn_pkg.sv
+// vlog src/magnitude.sv
+// vlog tb/magnitude_tb.sv
+// vsim magnitude_tb
+// run -all
+
 `timescale 1ns/1ps
 
 import lockIn_pkg::*;

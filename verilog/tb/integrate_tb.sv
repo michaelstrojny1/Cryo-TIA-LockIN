@@ -1,3 +1,9 @@
+// vlog pkg/lockIn_pkg.sv
+// vlog src/integrate.sv
+// vlog tb/integrate_tb.sv
+// vsim integrate_tb
+// run -all
+
 `timescale 1ns/1ps
 
 import lockIn_pkg::*;
