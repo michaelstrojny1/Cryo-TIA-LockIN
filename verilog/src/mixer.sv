@@ -72,8 +72,8 @@ module mixer #(
                 multQ <= dataIn * cosLUT[phaseIndex];
 
                 // Scale result back down
-                dataOut.I <= multI[WIDTH+LUT_WIDTH-1:LUT_WIDTH];
-                dataOut.Q <= multQ[WIDTH+LUT_WIDTH-1:LUT_WIDTH];
+                dataOut.I <= multI >>> (LUT_WIDTH-1);
+                dataOut.Q <= multQ >>> (LUT_WIDTH-1);
 
                 dataOut.valid <= 1;
 

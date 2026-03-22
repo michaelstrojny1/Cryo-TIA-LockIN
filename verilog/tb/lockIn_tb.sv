@@ -62,7 +62,7 @@ module lockIn_tb;
     real phase;
     real freq;
     real sample;
-    int  amplitude = 10000;
+    int  amplitude = 1000;
 
     initial begin
         $display("\n==============================================");
@@ -82,7 +82,7 @@ module lockIn_tb;
         reset = 0;
 
         // Run simulation for multiple cycles
-        repeat (200) begin
+        repeat (800000) begin
             @(posedge clk);
 
             // Generate test sine input

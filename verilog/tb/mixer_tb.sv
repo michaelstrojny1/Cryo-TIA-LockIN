@@ -27,7 +27,7 @@ module mixer_tb;
 
     logic clk;
     logic reset;
-    logic signed [WIDTH-1:0] dataIn;
+    sampleT dataIn;
 
     mixerOutputT dataOut;
 
@@ -81,7 +81,7 @@ module mixer_tb;
         reset = 0;
 
         // Run simulation for many cycles
-        repeat (20) begin
+        repeat (200) begin
 
             @(posedge clk);
 
