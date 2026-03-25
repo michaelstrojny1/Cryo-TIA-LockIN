@@ -14,7 +14,7 @@ module integrate_tb;
     // Parameters
     // ------------------------------------------------------------
 
-    localparam int SAMPLES    = 1024;
+    localparam int SAMPLES    = 81536;
     localparam int CLK_PERIOD = 10;
 
     localparam int DATA_WIDTH = 32;

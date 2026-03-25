@@ -4,15 +4,15 @@
 // vlog src/magnitude.sv
 // vlog src/phase.sv
 // vlog src/lockIn.sv
-// vlog tb/lockIn_tb.sv
-// vsim lockIn_tb
+// vlog tb/lockIn_tbNoise.sv
+// vsim lockIn_tbNoise
 // run -all
 
 `timescale 1ns/1ps
 
 import lockIn_pkg::*;
 
-module lockIn_tb;
+module lockIn_tbNoise;
 
     // ------------------------------------------------------------
     // Parameters
@@ -59,10 +59,13 @@ module lockIn_tb;
     // Stimulus
     // ------------------------------------------------------------
 
-    real phase;
-    real freq;
+    real phase1, phase2, phase3;
+    real freq1, freq2, freq3;
     real sample;
-    int  amplitude = 100;
+
+    int amplitude1 = 100;  // target signal (6000 Hz)
+    int amplitude2 = 300;  // interferer 1
+    int amplitude3 = 200;  // interferer 2
 
     initial begin
         $display("\n==============================================");
@@ -71,26 +74,40 @@ module lockIn_tb;
 
         $display("time\tinput\tI\tQ\tmag\tphase\tvalid");
 
-        reset   = 1;
+        reset    = 1;
         sampleIn = 0;
-        validIn = 0;
-        phase   = 0;
-        freq    = 6000.0; // Test frequency
+        validIn  = 0;
 
-        // Apply reset for a few cycles
+        // Initialize phases
+        phase1 = 0;
+        phase2 = 0;
+        phase3 = 0;
+
+        // Frequencies
+        freq1 = 6000.0;   // lock-in reference frequency
+        freq2 = 9000.0;   // interferer
+        freq3 = 12345.0;  // interferer
+
+        // Apply reset
         repeat (10) @(posedge clk);
         reset = 0;
 
-        // Run simulation for multiple cycles
-        repeat (16000000) begin
+        // Run simulation
+        repeat (800000) begin
             @(posedge clk);
 
-            // Generate test sine input
-            phase += 2.0 * 3.1415926535 * freq / CLK_FREQ;
-            sample = amplitude * $sin(phase);
+            // Update phases
+            phase1 += 2.0 * 3.1415926535 * freq1 / CLK_FREQ;
+            phase2 += 2.0 * 3.1415926535 * freq2 / CLK_FREQ;
+            phase3 += 2.0 * 3.1415926535 * freq3 / CLK_FREQ;
+
+            // Generate composite signal
+            sample = amplitude1 * $sin(phase1)
+                + amplitude2 * $sin(phase2)
+                + amplitude3 * $sin(phase3);
+
             sampleIn = $rtoi(sample);
 
-            // Mark input valid every cycle
             validIn = 1;
         end
 
