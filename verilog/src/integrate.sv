@@ -1,7 +1,7 @@
 import lockIn_pkg::*;
 
 module integrate #(
-    parameter int SAMPLES = 1024
+    parameter int SAMPLES = 4096
 )(
     input  logic  clk,
     input  logic  reset,
