@@ -7,14 +7,14 @@ module cic #(
     parameter int ADCWidth    = 16,
     parameter int AccumWidth  = ADCWidth + N * $clog2(R*M)
 ) (
-    input  logic                 clk,
-    input  logic                 rst,
+    input  logic                    clk,
+    input  logic                    rst,
 
-    input  logic [ADCWidth-1:0]  dataIn,
-    input  logic                 validIn,
+    input  logic [ADCWidth-1:0]     dataIn,
+    input  logic                    validIn,
 
-    output sampleT               dataOut,
-    output logic                 validOut
+    output logic [AccumWidth-1:0]   dataOut,
+    output logic                    validOut
 );
 
     // ------------------------------------------------------------
@@ -82,8 +82,7 @@ module cic #(
 
     assign validInternal   = decimationStrobe;
 
-    assign dataOut.data    = combOut;
-    assign dataOut.valid   = validInternal;
+    assign dataOut         = combOut;
     assign validOut        = validInternal;
 
 endmodule

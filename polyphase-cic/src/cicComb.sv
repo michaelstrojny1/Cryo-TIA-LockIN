@@ -16,10 +16,10 @@ module cicComb #(
     // Internal Signals
     // ------------------------------------------------------------
 
-    logic [Width-1:0] stage [N];
-    logic [Width-1:0] delayLine [N][M];
+    logic [Width-1:0] stage     [N];
+    logic [Width-1:0] prevValue [N];
 
-    integer i, j;
+    integer i;
 
     // ------------------------------------------------------------
     // Comb Chain
@@ -28,34 +28,22 @@ module cicComb #(
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             for (i = 0; i < N; i++) begin
-                stage[i] <= '0;
-                for (j = 0; j < M; j++) begin
-                    delayLine[i][j] <= '0;
-                end
+                stage[i]     <= '0;
+                prevValue[i] <= '0;
             end
         end
         else if (ce) begin
 
             // ---- Stage 0 ----
-            stage[0] <= dataIn - delayLine[0][M-1];
-
-            // Shift delay line
-            delayLine[0][0] <= dataIn;
-            for (j = 1; j < M; j++) begin
-                delayLine[0][j] <= delayLine[0][j-1];
-            end
+            stage[0]     <= dataIn - prevValue[0];
+            prevValue[0] <= dataIn;
 
             // ---- Remaining stages ----
             for (i = 1; i < N; i++) begin
-
-                stage[i] <= stage[i-1] - delayLine[i][M-1];
-
-                delayLine[i][0] <= stage[i-1];
-                for (j = 1; j < M; j++) begin
-                    delayLine[i][j] <= delayLine[i][j-1];
-                end
-
+                stage[i]     <= stage[i-1] - prevValue[i];
+                prevValue[i] <= stage[i-1];
             end
+
         end
     end
 

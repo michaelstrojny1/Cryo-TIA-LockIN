@@ -87,7 +87,7 @@ module cic_tb;
             dataIn = i;
 
             $display("i=%2d in=%4d validOut=%1b out=%6d",
-                     i, dataIn, validOut, dataOut.data);
+                     i, dataIn, validOut, dataOut);
         end
 
         $finish;

@@ -33,6 +33,22 @@ module cicComb_tb;
     logic [Width-1:0] dataOut;
 
     // ------------------------------------------------------------
+    // Monitor internal DUT signals
+    // ------------------------------------------------------------
+
+    logic [Width-1:0] stage0;
+    logic [Width-1:0] stage1;
+
+    logic [Width-1:0] prev0;
+    logic [Width-1:0] prev1;
+
+    assign stage0 = dut.stage[0];
+    assign stage1 = dut.stage[1];
+
+    assign prev0  = dut.prevValue[0];
+    assign prev1  = dut.prevValue[1];
+
+    // ------------------------------------------------------------
     // DUT
     // ------------------------------------------------------------
 
@@ -54,9 +70,9 @@ module cicComb_tb;
 
     initial begin
 
-        $display("\n========================================");
-        $display("CIC Comb Test");
-        $display("========================================\n");
+        $display("\n======================================================");
+        $display("CIC Comb Test (with internal signals)");
+        $display("======================================================\n");
 
         rst    = 1;
         ce     = 0;
@@ -68,17 +84,21 @@ module cicComb_tb;
 
         $display("Applying CE-gated ramp...\n");
 
+        $display(" i | in | ce | stage0 | prev0 | stage1 | prev1 | out");
+        $display("------------------------------------------------------");
+
         for (int i = 0; i < 20; i++) begin
 
             @(posedge clk);
 
             dataIn = i;
+            ce     = (i % 4 == 0);
 
-            // Pulse CE every 4 cycles
-            ce = (i % 4 == 0);
-
-            $display("i=%2d in=%4d ce=%1b out=%6d",
-                     i, dataIn, ce, dataOut);
+            $display("%2d | %3d | %1b  | %6d | %6d | %6d | %6d | %6d",
+                     i, dataIn, ce,
+                     stage0, prev0,
+                     stage1, prev1,
+                     dataOut);
         end
 
         $finish;
