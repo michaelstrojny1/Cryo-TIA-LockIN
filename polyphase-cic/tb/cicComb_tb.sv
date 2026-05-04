@@ -1,17 +1,18 @@
-// vlog src/cicIntegrator.sv
-// vlog tb/cicIntegrator_tb.sv
-// vsim cicIntegrator_tb
+// vlog src/cicComb.sv
+// vlog tb/cicComb_tb.sv
+// vsim cicComb_tb
 // run -all
 
 `timescale 1ns/1ps
 
-module cicIntegrator_tb;
+module cicComb_tb;
 
     // ------------------------------------------------------------
     // Parameters
     // ------------------------------------------------------------
 
     localparam int N          = 2;
+    localparam int M          = 1;
     localparam int Width      = 16;
     localparam int CLK_PERIOD = 10;
 
@@ -27,31 +28,22 @@ module cicIntegrator_tb;
     // ------------------------------------------------------------
 
     logic rst;
-    logic validIn;
+    logic ce;
     logic [Width-1:0] dataIn;
     logic [Width-1:0] dataOut;
-
-    // ------------------------------------------------------------
-    // Monitor internal signals
-    // ------------------------------------------------------------
-
-    logic [Width-1:0] stage0;
-    logic [Width-1:0] stage1;
-
-    assign stage0 = dut.stage[0];
-    assign stage1 = dut.stage[1];
 
     // ------------------------------------------------------------
     // DUT
     // ------------------------------------------------------------
 
-    cicIntegrator #(
+    cicComb #(
         .N(N),
+        .M(M),
         .Width(Width)
     ) dut (
         .clk(clk),
         .rst(rst),
-        .validIn(validIn),
+        .ce(ce),
         .dataIn(dataIn),
         .dataOut(dataOut)
     );
@@ -63,26 +55,30 @@ module cicIntegrator_tb;
     initial begin
 
         $display("\n========================================");
-        $display("CIC Integrator Test");
+        $display("CIC Comb Test");
         $display("========================================\n");
 
-        rst     = 1;
-        validIn = 0;
-        dataIn  = 0;
+        rst    = 1;
+        ce     = 0;
+        dataIn = 0;
 
         repeat (3) @(posedge clk);
 
         rst = 0;
-        validIn = 1;
 
-        $display("Applying ramp input...\n");
+        $display("Applying CE-gated ramp...\n");
 
-        for (int i = 0; i < 10; i++) begin
-            dataIn = i;
+        for (int i = 0; i < 20; i++) begin
+
             @(posedge clk);
 
-            $display("i=%2d in=%4d stage0=%6d stage1=%6d out=%6d",
-                     i, dataIn, stage0, stage1, dataOut);
+            dataIn = i;
+
+            // Pulse CE every 4 cycles
+            ce = (i % 4 == 0);
+
+            $display("i=%2d in=%4d ce=%1b out=%6d",
+                     i, dataIn, ce, dataOut);
         end
 
         $finish;

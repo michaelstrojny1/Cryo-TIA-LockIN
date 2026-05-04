@@ -1,18 +1,17 @@
-// vlog src/cicIntegrator.sv
-// vlog tb/cicIntegrator_tb.sv
-// vsim cicIntegrator_tb
+// vlog src/cicDecimator.sv
+// vlog tb/cicDecimator_tb.sv
+// vsim cicDecimator_tb
 // run -all
 
 `timescale 1ns/1ps
 
-module cicIntegrator_tb;
+module cicDecimator_tb;
 
     // ------------------------------------------------------------
     // Parameters
     // ------------------------------------------------------------
 
-    localparam int N          = 2;
-    localparam int Width      = 16;
+    localparam int R          = 4;
     localparam int CLK_PERIOD = 10;
 
     // ------------------------------------------------------------
@@ -28,32 +27,26 @@ module cicIntegrator_tb;
 
     logic rst;
     logic validIn;
-    logic [Width-1:0] dataIn;
-    logic [Width-1:0] dataOut;
+    logic ce;
 
     // ------------------------------------------------------------
-    // Monitor internal signals
+    // Monitor internal
     // ------------------------------------------------------------
 
-    logic [Width-1:0] stage0;
-    logic [Width-1:0] stage1;
-
-    assign stage0 = dut.stage[0];
-    assign stage1 = dut.stage[1];
+    logic [$clog2(R)-1:0] count;
+    assign count = dut.count;
 
     // ------------------------------------------------------------
     // DUT
     // ------------------------------------------------------------
 
-    cicIntegrator #(
-        .N(N),
-        .Width(Width)
+    cicDecimator #(
+        .R(R)
     ) dut (
         .clk(clk),
         .rst(rst),
         .validIn(validIn),
-        .dataIn(dataIn),
-        .dataOut(dataOut)
+        .ce(ce)
     );
 
     // ------------------------------------------------------------
@@ -63,26 +56,24 @@ module cicIntegrator_tb;
     initial begin
 
         $display("\n========================================");
-        $display("CIC Integrator Test");
+        $display("CIC Decimator Test");
         $display("========================================\n");
 
         rst     = 1;
         validIn = 0;
-        dataIn  = 0;
 
         repeat (3) @(posedge clk);
 
         rst = 0;
         validIn = 1;
 
-        $display("Applying ramp input...\n");
+        $display("Counting and generating CE...\n");
 
-        for (int i = 0; i < 10; i++) begin
-            dataIn = i;
+        for (int i = 0; i < 20; i++) begin
             @(posedge clk);
 
-            $display("i=%2d in=%4d stage0=%6d stage1=%6d out=%6d",
-                     i, dataIn, stage0, stage1, dataOut);
+            $display("i=%2d count=%2d ce=%1b",
+                     i, count, ce);
         end
 
         $finish;

@@ -1,17 +1,25 @@
+// vlog pkg/lockIn_pkg.sv
 // vlog src/cicIntegrator.sv
-// vlog tb/cicIntegrator_tb.sv
-// vsim cicIntegrator_tb
+// vlog src/cicDecimator.sv
+// vlog src/cicComb.sv
+// vlog src/cic.sv
+// vlog tb/cic_tb.sv
+// vsim cic_tb
 // run -all
 
 `timescale 1ns/1ps
 
-module cicIntegrator_tb;
+import lockIn_pkg::*;
+
+module cic_tb;
 
     // ------------------------------------------------------------
     // Parameters
     // ------------------------------------------------------------
 
+    localparam int R          = 4;
     localparam int N          = 2;
+    localparam int M          = 1;
     localparam int Width      = 16;
     localparam int CLK_PERIOD = 10;
 
@@ -29,31 +37,26 @@ module cicIntegrator_tb;
     logic rst;
     logic validIn;
     logic [Width-1:0] dataIn;
-    logic [Width-1:0] dataOut;
 
-    // ------------------------------------------------------------
-    // Monitor internal signals
-    // ------------------------------------------------------------
-
-    logic [Width-1:0] stage0;
-    logic [Width-1:0] stage1;
-
-    assign stage0 = dut.stage[0];
-    assign stage1 = dut.stage[1];
+    sampleT dataOut;
+    logic   validOut;
 
     // ------------------------------------------------------------
     // DUT
     // ------------------------------------------------------------
 
-    cicIntegrator #(
+    cic #(
+        .R(R),
         .N(N),
-        .Width(Width)
+        .M(M),
+        .ADCWidth(Width)
     ) dut (
         .clk(clk),
         .rst(rst),
         .validIn(validIn),
         .dataIn(dataIn),
-        .dataOut(dataOut)
+        .dataOut(dataOut),
+        .validOut(validOut)
     );
 
     // ------------------------------------------------------------
@@ -63,7 +66,7 @@ module cicIntegrator_tb;
     initial begin
 
         $display("\n========================================");
-        $display("CIC Integrator Test");
+        $display("Full CIC Test");
         $display("========================================\n");
 
         rst     = 1;
@@ -77,12 +80,14 @@ module cicIntegrator_tb;
 
         $display("Applying ramp input...\n");
 
-        for (int i = 0; i < 10; i++) begin
-            dataIn = i;
+        for (int i = 0; i < 40; i++) begin
+
             @(posedge clk);
 
-            $display("i=%2d in=%4d stage0=%6d stage1=%6d out=%6d",
-                     i, dataIn, stage0, stage1, dataOut);
+            dataIn = i;
+
+            $display("i=%2d in=%4d validOut=%1b out=%6d",
+                     i, dataIn, validOut, dataOut.data);
         end
 
         $finish;
