@@ -86,8 +86,8 @@ module cic_tb;
 
             dataIn = i;
 
-            $display("i=%2d in=%4d validOut=%1b out=%6d",
-                     i, dataIn, validOut, dataOut);
+            $display("i=%2d in=%4d validOut=%1b out=%6d, integratorOut=%6d",
+                     i, dataIn, validOut, dataOut, dut.integratorOut);
         end
 
         $finish;

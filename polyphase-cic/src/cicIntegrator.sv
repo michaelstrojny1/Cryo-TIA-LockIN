@@ -1,22 +1,20 @@
 module cicIntegrator #(
-    parameter int N,
-    parameter int Width
+    parameter int InputWidth  = 16,
+    parameter int AccumWidth  = 24,
+    parameter int N           = 4
 ) (
-    input  logic                 clk,
-    input  logic                 rst,
-
-    input  logic                 validIn,
-    input  logic [Width-1:0]     dataIn,
-
-    output logic [Width-1:0]     dataOut
+    input  logic                    clk,
+    input  logic                    rst,
+    input  logic                    validIn,
+    input  logic [InputWidth-1:0]   dataIn,
+    output logic [AccumWidth-1:0]   dataOut
 );
 
     // ------------------------------------------------------------
     // Internal Signals
     // ------------------------------------------------------------
 
-    logic [Width-1:0] stage [N];
-
+    logic [AccumWidth-1:0] stage [N];
     integer i;
 
     // ------------------------------------------------------------
@@ -30,9 +28,9 @@ module cicIntegrator #(
             end
         end
         else if (validIn) begin
-            // First stage
-            stage[0] <= stage[0] + dataIn;
-
+            // First stage: add input (properly extended to AccumWidth)
+            stage[0] <= stage[0] + {{(AccumWidth-InputWidth){dataIn[InputWidth-1]}}, dataIn};
+            
             // Remaining stages
             for (i = 1; i < N; i++) begin
                 stage[i] <= stage[i] + stage[i-1];

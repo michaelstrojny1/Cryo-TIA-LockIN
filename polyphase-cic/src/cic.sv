@@ -23,24 +23,21 @@ module cic #(
 
     logic [AccumWidth-1:0] integratorOut;
     logic [AccumWidth-1:0] combOut;
-
     logic                  decimationStrobe;
-    logic                  validInternal;
 
     // ------------------------------------------------------------
     // Integrator Chain
     // ------------------------------------------------------------
-
+    // Pass AccumWidth to integrator for output, ADCWidth for input
     cicIntegrator #(
-        .N(N),
-        .Width(AccumWidth)
+        .InputWidth   (ADCWidth),
+        .AccumWidth   (AccumWidth),
+        .N            (N)
     ) uIntegrator (
         .clk     (clk),
         .rst     (rst),
-
         .validIn (validIn),
         .dataIn  (dataIn),
-
         .dataOut (integratorOut)
     );
 
@@ -53,7 +50,6 @@ module cic #(
     ) uDecimator (
         .clk (clk),
         .rst (rst),
-
         .validIn (validIn),
         .ce      (decimationStrobe)
     );
@@ -69,10 +65,8 @@ module cic #(
     ) uComb (
         .clk     (clk),
         .rst     (rst),
-
         .ce      (decimationStrobe),
         .dataIn  (integratorOut),
-
         .dataOut (combOut)
     );
 
@@ -80,9 +74,7 @@ module cic #(
     // Output
     // ------------------------------------------------------------
 
-    assign validInternal   = decimationStrobe;
-
-    assign dataOut         = combOut;
-    assign validOut        = validInternal;
+    assign dataOut  = combOut;
+    assign validOut = decimationStrobe;
 
 endmodule
