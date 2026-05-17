@@ -16,29 +16,32 @@ module lockIn (
     // Inter-Module Signals
     // ------------------------------------------------------------
 
-    mixerOutputT mixerOut;
+    mixerOutputT    mixerOut;
 
-    accumT I_int;
-    accumT Q_int;
+    accumT          I_int;
+    accumT          Q_int;
 
-    logic  I_validOut;
-    logic  Q_validOut;
+    logic           I_validOut;
+    logic           Q_validOut;
 
-    longAccumT  magnitude_val;
-    phaseAngleT phase_val;
+    longAccumT      magnitude_val;
+    phaseAngleT     phase_val;
 
-    logic valid_int;
+    logic           valid_int;
 
     // ------------------------------------------------------------
     // Mixer Stage
     // ------------------------------------------------------------
 
     mixer u_mixer (
-        .clk    (clk),
-        .reset  (reset),
 
-        .dataIn (dataIn),
-        .dataOut(mixerOut)
+        .clk        (clk),
+        .reset      (reset),
+
+        .dataIn     (dataIn),
+
+        .dataOut    (mixerOut)
+
     );
 
     // ------------------------------------------------------------
@@ -47,27 +50,27 @@ module lockIn (
 
     integrate integrate_cos (
 
-        .clk     (clk),
-        .reset   (reset),
+        .clk        (clk),
+        .reset      (reset),
 
-        .validIn (mixerOut.valid),
-        .dataIn  (mixerOut.I),
+        .validIn    (mixerOut.valid),
+        .dataIn     (mixerOut.I),
 
-        .dataOut (I_int),
-        .validOut(I_validOut)
+        .dataOut    (I_int),
+        .validOut   (I_validOut)
 
     );
 
     integrate integrate_sin (
 
-        .clk     (clk),
-        .reset   (reset),
+        .clk        (clk),
+        .reset      (reset),
 
-        .validIn (mixerOut.valid),
-        .dataIn  (mixerOut.Q),
+        .validIn    (mixerOut.valid),
+        .dataIn     (mixerOut.Q),
 
-        .dataOut (Q_int),
-        .validOut(Q_validOut)
+        .dataOut    (Q_int),
+        .validOut   (Q_validOut)
 
     );
 
@@ -79,6 +82,7 @@ module lockIn (
 
         .I          (I_int),
         .Q          (Q_int),
+
         .magOut     (magnitude_val)
 
     );
@@ -91,6 +95,7 @@ module lockIn (
 
         .I        (I_int),
         .Q        (Q_int),
+        
         .phaseOut (phase_val)
 
     );

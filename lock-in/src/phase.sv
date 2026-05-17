@@ -1,8 +1,10 @@
 import lockIn_pkg::*;
 
 module phase (
+
     input  accumT      I,
     input  accumT      Q,
+    
     output phaseAngleT phaseOut
 );
 

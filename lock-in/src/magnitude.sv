@@ -1,9 +1,12 @@
 import lockIn_pkg::*;
 
 module magnitude (
+
     input  accumT      I,
     input  accumT      Q,
+
     output longAccumT  magOut
+    
 );
 
     // ------------------------------------------------------------

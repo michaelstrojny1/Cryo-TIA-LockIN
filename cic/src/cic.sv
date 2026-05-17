@@ -1,12 +1,14 @@
-import lockIn_pkg::*;
-
 module cic #(
+
     parameter int R           = 4,
     parameter int N           = 4,
     parameter int M           = 1,
+
     parameter int ADCWidth    = 16,
     parameter int AccumWidth  = ADCWidth + N * $clog2(R*M)
+
 ) (
+
     input  logic                    clk,
     input  logic                    rst,
 
@@ -15,6 +17,7 @@ module cic #(
 
     output logic [AccumWidth-1:0]   dataOut,
     output logic                    validOut
+
 );
 
     // ------------------------------------------------------------
@@ -28,17 +31,25 @@ module cic #(
     // ------------------------------------------------------------
     // Integrator Chain
     // ------------------------------------------------------------
+
     // Pass AccumWidth to integrator for output, ADCWidth for input
+
     cicIntegrator #(
-        .InputWidth   (ADCWidth),
-        .AccumWidth   (AccumWidth),
-        .N            (N)
+
+        .InputWidth     (ADCWidth),
+        .AccumWidth     (AccumWidth),
+        .N              (N)
+
     ) uIntegrator (
-        .clk     (clk),
-        .rst     (rst),
-        .validIn (validIn),
-        .dataIn  (dataIn),
-        .dataOut (integratorOut)
+
+        .clk            (clk),
+        .rst            (rst),
+
+        .validIn        (validIn),
+        .dataIn         (dataIn),
+
+        .dataOut        (integratorOut)
+
     );
 
     // ------------------------------------------------------------
@@ -46,12 +57,18 @@ module cic #(
     // ------------------------------------------------------------
 
     cicDecimator #(
+
         .R(R)
+
     ) uDecimator (
-        .clk (clk),
-        .rst (rst),
-        .validIn (validIn),
-        .ce      (decimationStrobe)
+        
+        .clk        (clk),
+        .rst        (rst),
+
+        .validIn    (validIn),
+
+        .ce         (decimationStrobe)
+
     );
 
     // ------------------------------------------------------------
@@ -59,15 +76,21 @@ module cic #(
     // ------------------------------------------------------------
 
     cicComb #(
-        .N(N),
-        .M(M),
-        .Width(AccumWidth)
+
+        .N          (N),
+        .M          (M),
+        .Width      (AccumWidth)
+
     ) uComb (
-        .clk     (clk),
-        .rst     (rst),
-        .ce      (decimationStrobe),
-        .dataIn  (integratorOut),
-        .dataOut (combOut)
+
+        .clk        (clk),
+        .rst        (rst),
+
+        .ce         (decimationStrobe),
+        .dataIn     (integratorOut),
+
+        .dataOut    (combOut)
+
     );
 
     // ------------------------------------------------------------

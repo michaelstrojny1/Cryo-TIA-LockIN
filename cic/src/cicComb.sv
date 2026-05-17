@@ -1,8 +1,11 @@
 module cicComb #(
+
     parameter int N,
     parameter int M,
     parameter int Width
+
 ) (
+    
     input  logic                 clk,
     input  logic                 rst,
 
@@ -10,6 +13,7 @@ module cicComb #(
     input  logic [Width-1:0]     dataIn,
 
     output logic [Width-1:0]     dataOut
+    
 );
 
     // ------------------------------------------------------------

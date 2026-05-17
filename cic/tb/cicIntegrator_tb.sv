@@ -26,10 +26,10 @@ module cicIntegrator_tb;
     // DUT signals
     // ------------------------------------------------------------
 
-    logic rst;
-    logic validIn;
-    logic [Width-1:0] dataIn;
-    logic [Width-1:0] dataOut;
+    logic               rst;
+    logic               validIn;
+    logic   [Width-1:0] dataIn;
+    logic   [Width-1:0] dataOut;
 
     // ------------------------------------------------------------
     // Monitor internal signals
@@ -46,14 +46,20 @@ module cicIntegrator_tb;
     // ------------------------------------------------------------
 
     cicIntegrator #(
-        .N(N),
-        .Width(Width)
+
+        .N          (N),
+        .Width      (Width)
+
     ) dut (
-        .clk(clk),
-        .rst(rst),
-        .validIn(validIn),
-        .dataIn(dataIn),
-        .dataOut(dataOut)
+
+        .clk        (clk),
+        .rst        (rst),
+
+        .validIn    (validIn),
+        .dataIn     (dataIn),
+        
+        .dataOut    (dataOut)
+
     );
 
     // ------------------------------------------------------------

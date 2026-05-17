@@ -27,10 +27,10 @@ module cicComb_tb;
     // DUT signals
     // ------------------------------------------------------------
 
-    logic rst;
-    logic ce;
-    logic [Width-1:0] dataIn;
-    logic [Width-1:0] dataOut;
+    logic               rst;
+    logic               ce;
+    logic   [Width-1:0] dataIn;
+    logic   [Width-1:0] dataOut;
 
     // ------------------------------------------------------------
     // Monitor internal DUT signals
@@ -53,15 +53,21 @@ module cicComb_tb;
     // ------------------------------------------------------------
 
     cicComb #(
-        .N(N),
-        .M(M),
-        .Width(Width)
+
+        .N          (N),
+        .M          (M),
+        .Width      (Width)
+
     ) dut (
-        .clk(clk),
-        .rst(rst),
-        .ce(ce),
-        .dataIn(dataIn),
-        .dataOut(dataOut)
+
+        .clk        (clk),
+        .rst        (rst),
+
+        .ce         (ce),
+        .dataIn     (dataIn),
+
+        .dataOut    (dataOut)
+
     );
 
     // ------------------------------------------------------------

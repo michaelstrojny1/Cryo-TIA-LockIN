@@ -21,6 +21,7 @@ module cic_tb;
     localparam int N          = 2;
     localparam int M          = 1;
     localparam int Width      = 16;
+    localparam int AccumWidth = ADCWidth + N * $clog2(R*M)
     localparam int CLK_PERIOD = 10;
 
     // ------------------------------------------------------------
@@ -34,29 +35,35 @@ module cic_tb;
     // DUT signals
     // ------------------------------------------------------------
 
-    logic rst;
-    logic validIn;
-    logic [Width-1:0] dataIn;
+    logic                       rst;
+    logic                       validIn;
+    logic   [Width-1:0]         dataIn;
 
-    sampleT dataOut;
-    logic   validOut;
+    logic   [AccumWidth-1:0]    dataOut;
+    logic                       validOut;
 
     // ------------------------------------------------------------
     // DUT
     // ------------------------------------------------------------
 
     cic #(
-        .R(R),
-        .N(N),
-        .M(M),
-        .ADCWidth(Width)
+
+        .R          (R),
+        .N          (N),
+        .M          (M),
+        .ADCWidth   (Width)
+
     ) dut (
-        .clk(clk),
-        .rst(rst),
-        .validIn(validIn),
-        .dataIn(dataIn),
-        .dataOut(dataOut),
-        .validOut(validOut)
+
+        .clk        (clk),
+        .rst        (rst),
+
+        .validIn    (validIn),
+        .dataIn     (dataIn),
+        
+        .dataOut    (dataOut),
+        .validOut   (validOut)
+
     );
 
     // ------------------------------------------------------------
@@ -86,8 +93,8 @@ module cic_tb;
 
             dataIn = i;
 
-            $display("i=%2d in=%4d validOut=%1b out=%6d, integratorOut=%6d",
-                     i, dataIn, validOut, dataOut, dut.integratorOut);
+            $display("in=%4d validOut=%1b out=%6d",
+                     dataIn, validOut, dataOut);
         end
 
         $finish;

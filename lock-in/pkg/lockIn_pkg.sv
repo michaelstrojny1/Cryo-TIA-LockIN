@@ -9,29 +9,6 @@ package lockIn_pkg;
     typedef logic signed [63:0] longAccumT;
 
     // ------------------------------------------------------------
-    // CIC Filter Parameters
-    // ------------------------------------------------------------
-
-    typedef struct packed {
-
-        int R;      // Decimation factor
-        int N;      // Number of stages
-        int M;      // Differential delay
-
-    } cicParamsT;
-
-    // ------------------------------------------------------------
-    // Polyphase Branch State
-    // ------------------------------------------------------------
-
-    typedef struct {
-
-        accumT intState;    // Integrator state
-        accumT combState;   // Comb state
-
-    } polyphaseBranchT;
-
-    // ------------------------------------------------------------
     // Mixer Phase Enumeration
     // ------------------------------------------------------------
 
@@ -43,18 +20,6 @@ package lockIn_pkg;
         PHASE_270 = 2'b11
 
     } phaseAngleT;
-
-    // ------------------------------------------------------------
-    // Interface: CIC to Mixer
-    // ------------------------------------------------------------
-
-    typedef struct {
-
-        accumT      data;
-        logic       valid;
-        phaseAngleT phase;
-
-    } cicOutputT;
 
     // ------------------------------------------------------------
     // Mixer Output

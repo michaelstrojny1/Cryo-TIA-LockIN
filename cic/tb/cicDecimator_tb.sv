@@ -41,12 +41,18 @@ module cicDecimator_tb;
     // ------------------------------------------------------------
 
     cicDecimator #(
-        .R(R)
+
+        .R          (R)
+
     ) dut (
-        .clk(clk),
-        .rst(rst),
-        .validIn(validIn),
-        .ce(ce)
+
+        .clk        (clk),
+        .rst        (rst),
+
+        .validIn    (validIn),
+        
+        .ce         (ce)
+
     );
 
     // ------------------------------------------------------------

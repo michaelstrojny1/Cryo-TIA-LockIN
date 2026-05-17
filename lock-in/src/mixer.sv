@@ -1,11 +1,15 @@
 import lockIn_pkg::*;
 
 module mixer #(
+
     parameter integer CLK_FREQ  = 100_000_000, // 100 MHz system clock
     parameter integer MIX_FREQ  = 6000,        // desired mixing frequency
+
     parameter integer WIDTH     = 16,          // input data width
+    
     parameter integer LUT_SIZE  = 1024,        // sine/cos LUT size
     parameter integer LUT_WIDTH = 16           // LUT sample width
+
 ) (
     input  logic                     clk,
     input  logic                     reset,
